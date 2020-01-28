@@ -36,10 +36,14 @@ opcion = 0
 
 while not salir:
  
-    print ("1. Generar Alfabeto (\u03A3)")
-    print ("2. Leer el Alfabeto (\u03A3)")
-    print ("3. Opcion 3")
-    print ("4. Salir")
+    print("""
+
+            1. Generar Alfabeto (\u03A3).
+            2. Leer el Alfabeto (\u03A3).
+            3. Limpiar el Alfabeto (\u03A3).
+            4. Salir.
+            
+        """)
      
     print ("Elige una opcion")
  
@@ -50,7 +54,8 @@ while not salir:
         print("""¿Como desea generar su alfabeto (\u03A3):
                     Opcion 1: Por default de la A a la Z en minusculas
                     Opcion 2: Por default de la A a la Z en mayusculas
-                    Opcion 3: Por un rango especifico dentro del intervalo con minusculas""")
+                    Opcion 3: Por default de la A a la Z en minusculas y mayusculas
+                    Opcion 4: Por un rango especifico dentro del intervalo con minusculas y mayusculas""")
         opcionPrimerApartado = int(input("Que opcion desea? = "))
         if opcionPrimerApartado == 1:
             #Llenamos el alfabeto con metodo Naive...
@@ -61,20 +66,27 @@ while not salir:
         elif opcionPrimerApartado == 2:
             alfabeto1 = list(string.ascii_uppercase)
         elif opcionPrimerApartado == 3:
+            alfabeto1 = list(string.ascii_letters)
+        elif opcionPrimerApartado == 4:
             initialRange = int(input("Que valor desea para el rango inicial = "))
             finalRange = int (input("Que valor desea para el rango final = "))
-            #Llenamos el alfabeto con metodo Naive...
-            item = 'a'
-            for i in range(initialRange,finalRange):
-                alfabeto1.append(item)
-                item = chr(ord(item) + 1)
+            #ListaApoyo nos sirve para guardar el slice de datos de ALFABETO1
+            listaApoyo = []
+            alfabeto1 = list(string.ascii_letters)
+            listaApoyo = alfabeto1[initialRange:finalRange]
+            alfabeto1 = listaApoyo
+
+        #Con esto nuestra lista es convertida en un conjunto el cual debera ser ordenado, pero nps permitira dotarle de los atributos propios de conjunto.
+        alfabetoConjunto = set(alfabeto1)
 
     elif opcion == 2:
         #Imprimimos nuestro alfabeto despues de la insercion.
-        print("Este es el afabeto \u03A31   ==> " + str(alfabeto1))
+        print("Este es el afabeto \u03A3  ==> " + str(sorted(alfabetoConjunto)))
         
     elif opcion == 3:
-        print("Opcion 3")
+        alfabeto1 = []
+        alfabetoConjunto = {}
+        print("Hemos vaciado el alfabeto \u03A3.")
     elif opcion == 4:
         salir = True
     else:
