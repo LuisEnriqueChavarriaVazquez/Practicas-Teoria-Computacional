@@ -5,13 +5,13 @@
 import string
 import sys
 
-#Lista referencia
-letrasMin=list(string.ascii_uppercase)
-
-
+#Listas referencias
+letrasMay=list(string.ascii_uppercase)
+letrasMin=list(string.ascii_lowercase)
+numerosList=list(str(i) for i in range(0,10) )
 #Inicializando listas vacias
-alfabeto1 = []
-alfabeto2 = []
+alfabeto1 = [""]
+alfabeto2 = [""]
 
 #Validacion del menu
 
@@ -27,6 +27,55 @@ def pedirNumeroEntero():
             print('Error, introduce un numero entero valido')
      
     return num
+
+#Metodo para llenar abecedario
+def llenarABC():
+    listaEnt=[]
+    opcEntrada=0
+    print("""
+          
+          Opciones de llenado de abecedario:
+          1.Por rango
+          2.A mano
+    
+    """)
+    opcEntrada=pedirNumeroEntero()
+    if opcEntrada==1:
+        inicio=input("Escriba el inicio del rango:")
+        fin=input("Escriba el fin del rango:")
+        indiceInicio=0
+        indiceFin=0
+        if inicio in numerosList and fin in numerosList:
+            indiceInicio,indiceFin=int(inicio),int(fin)+1
+            if (indiceFin-indiceInicio)>=3:
+                listaEnt=list(numerosList[i] for i in range(indiceInicio,indiceFin))
+            else:
+                print("El abecedario debe tener mas de 3 elementos")
+        elif inicio in letrasMin and fin in letrasMin:
+            indiceInicio,indiceFin=int(letrasMin.index(inicio)),int(letrasMin.index(fin))+1
+            if (indiceFin-indiceInicio)>=3:
+                listaEnt=list(letrasMin[i] for i in range(indiceInicio,indiceFin))
+            else:
+                print("El abecedario debe tener mas de 3 elementos")
+        elif inicio in letrasMay and fin in letrasMay:
+            indiceInicio,indiceFin=int(letrasMay.index(inicio)),int(letrasMay.index(fin))+1
+            if (indiceFin-indiceInicio)>=3:
+                listaEnt=list(letrasMay[i] for i in range(indiceInicio,indiceFin))
+            else:
+                print("El abecedario debe tener mas de 3 elementos")
+        else:
+            print("Los parametros de rango no pertenenecen al mismo alfabeto")
+    elif opcEntrada==2:
+        listaAyuda=input("Escriba los elemntos:").split()
+        if len(listaAyuda)>=3:
+            listaEnt=listaAyuda
+        else:
+            print("El abecedario debe tener mas de 3 elementos")
+    else:
+        print("Eliga una opcion valida")
+    
+    return listaEnt
+    
 
 #Ciclo para el menu
 
@@ -64,25 +113,8 @@ while not salir:
         opcionGenerarAlfabetos=pedirNumeroEntero()
          
         if opcionGenerarAlfabetos== 1:
-            
-            formaGeneraAlfabato1=0
-            print("""
-            
-            ¿Como desea generar su alfabeto (\u03A3 1):
-                    Opcion 1:Por rango
-                    Opcion 2:De forma individual 
-                    
-                    """)
-            formaGeneraAlfabato1=pedirNumeroEntero()
-            if formaGeneraAlfabato1==1:
-                pass
-            elif formaGeneraAlfabato1==2:
-                pass
-
-            
-
-       
-
-         
-
-
+            print(alfabeto1)
+            alfabeto1=llenarABC()
+            print(alfabeto1)
+        elif opcionGenerarAlfabetos== 2:
+             alfabeto2=llenarABC()
