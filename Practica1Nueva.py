@@ -128,10 +128,36 @@ def elevarExponente(primeraPalabra,segundaPalabra):
         nuevaPalabraExponenciada = ((nuevaPalabraExponenciada)[::-1])
         nExponencial = (nExponencial * (-1))
         nuevaPalabraExponenciada *= nExponencial
-    else:
-        print("\nEl resultado de elevar a la cero es el elemento neutro (\u03BB)")
+    #else:
+        #print("\nEl resultado de elevar a la cero es el elemento neutro (\u03BB)")  ///
 
     print("\nEl resultado es : " + nuevaPalabraExponenciada)
+
+#Elevar un alfabeto N veces
+
+def potenciaAlfabeto(numero,alfabeto,base):
+    if numero == 0:
+        print("")
+        return
+    if numero > 1:
+        for palabra in alfabeto1:
+            potenciaAlfabeto((numero-1),alfabeto,palabra + str(base))
+    else:
+        for palabra in alfabeto1:
+            print(base + str(palabra), end = ",")
+
+def elevaAlfabetoPotencia(alfabeto1):
+    while 1 == 1:
+        nExponencialAlfabeto = int(input("¿Cuantas veces desea elevar el alfabeto 1?"))
+        try:
+            if nExponencialAlfabeto > 0:
+                break
+            print ("El numero es correcto")
+        except ValueError:
+            print("entrada incorrecta")
+    potenciaAlfabeto(nExponencialAlfabeto,alfabeto1,"")
+
+
 
 #GenerarPalabrasRandom
 def generadorPalabrasRandom(alfabetoEntrada1,alfabetoEntrada2):
@@ -227,5 +253,7 @@ while not salir:
             print("No es palindromo")
     elif opcionMenuPrincipal == 69:
         elevarExponente(primeraPalabra,segundaPalabra)
+    elif opcionMenuPrincipal == 24:
+        elevaAlfabetoPotencia(alfabeto1)
     elif opcionMenuPrincipal==45:
         print(generadorPalabrasRandom(alfabeto1,alfabeto2))
