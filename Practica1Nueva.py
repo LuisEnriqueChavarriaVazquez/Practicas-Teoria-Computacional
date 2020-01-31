@@ -157,6 +157,25 @@ def elevaAlfabetoPotencia(alfabeto1):
             print("entrada incorrecta")
     potenciaAlfabeto(nExponencialAlfabeto,alfabeto1,"")
 
+#sufijos,prefijos y subcadenas
+def encontrarPrefijoSufijoSubcadena(palabra,subPalabra):
+    if subPalabra in palabra or subPalabra =="":
+        if palabra.startswith(subPalabra):  
+            if palabra.endswith(subPalabra):
+                return "Es un subfijo, prefijo y subcadena"
+            else:
+                return "Es un prefijo"
+
+        elif palabra.endswith(subPalabra):
+            return "Es un subfijo"
+
+        else:
+            return "Es una subcadena"
+    
+    else:
+        return "No es una subcadena"
+
+
 
 
 #GenerarPalabrasRandom
@@ -255,5 +274,7 @@ while not salir:
         elevarExponente(primeraPalabra,segundaPalabra)
     elif opcionMenuPrincipal == 24:
         elevaAlfabetoPotencia(alfabeto1)
+    elif opcionMenuPrincipal == 12:
+        print(encontrarPrefijoSufijoSubcadena(segundaPalabra,primeraPalabra))
     elif opcionMenuPrincipal==45:
         print(generadorPalabrasRandom(alfabeto1,alfabeto2))
