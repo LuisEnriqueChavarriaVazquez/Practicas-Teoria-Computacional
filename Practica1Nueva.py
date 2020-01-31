@@ -4,6 +4,7 @@
     #Librerias de Python
 import string
 import sys
+import random
 
 #Listas referencias
 letrasMay=list(string.ascii_uppercase)
@@ -93,12 +94,13 @@ def perteneceAlfabeto(palabra,alfabeto):
         pertenece=1
     return pertenece
 
+#metodo para detectar ocurrencias de un elemento en una palabra de un abecedario
 def ocurrenciasLetraABC(abecedario,caracter,palabra):
     if caracter in abecedario:
         return palabra.count(caracter)
     else:
         return -1
-
+#detecion de un palindromo
 def deteccionPalindromo(palabra):
     palindromoEs=0
     parteInicio=0
@@ -113,6 +115,7 @@ def deteccionPalindromo(palabra):
             break
     return palindromoEs
 
+#ElevacionPalabra
 def elevarExponente(primeraPalabra,segundaPalabra):
     nExponencial = int(input("Indique el valor del exponente n [Puede ser un valor negativo o positivo]"))
 
@@ -130,19 +133,33 @@ def elevarExponente(primeraPalabra,segundaPalabra):
 
     print(nuevaPalabraExponenciada)
 
+#GenerarPalabrasRandom
+def generadorPalabrasRandom(alfabetoEntrada1,alfabetoEntrada2):
+    listaPalabras=[]
+    while len(listaPalabras)<3:
+        palabra=""
+        sizePalabra=random.randrange(1,8)
+        alfabetoSelecion=random.randrange(1,3)
+        if alfabetoSelecion==1:
+            for i in range(0,sizePalabra):
+                palabraSelecccion=alfabetoEntrada1[random.randrange(0,len(alfabetoEntrada1))]
+                palabra=palabra+palabraSelecccion
+            listaPalabras.append(palabra)
+        elif alfabetoSelecion==2:
+            for i in range(0,sizePalabra):
+                palabraSelecccion=alfabetoEntrada2[random.randrange(0,len(alfabetoEntrada2))]
+                palabra=palabra+palabraSelecccion
+            listaPalabras.append(palabra)
+    return listaPalabras
+        
 
-
-
-#Ciclo para el menu
-
+#Ciclo para el men
 salir = False
 opcionMenuPrincipal = 0
-
 while not salir:
  
     print("""
             Menu principal:
-
             1. Generar Alfabetos (\u03A3).
             2. Leer Alfabetos (\u03A3).
             3. Operaciones con los alfabetos.
@@ -160,12 +177,9 @@ while not salir:
         opcionGenerarAlfabetos=0
 
         print("""
-
             Menu generar alfabetos:
             1.Generar Alfabeto 1
             2.Generar Alfabeto 2     
-
-
          """)
         opcionGenerarAlfabetos=pedirNumeroEntero()
          
@@ -185,8 +199,19 @@ while not salir:
             primeraPalabra=input("Escriba palabra 1:")
             segundaPalabra=input("Escriba palabra 2:")
             if perteneceAlfabeto(primeraPalabra,alfabeto1)==1 and perteneceAlfabeto(segundaPalabra,alfabeto2)==1:
-                print("comensemos")
                 palabrasCorrectas=1
+                print("""
+                
+               Datos de salida con las palabras 
+                
+                1.Escribir (w1w2) ^n con n siendo postiva o negativa
+                2. Numero de ocurrencias de un caracter a seleccionar en w1
+                3.Indicador si w1 es un prefijo,subfijo,subcadena o subsencuencia de w2
+                4.Verificar si una palabra es un palindromo
+                5.Generar  (\u03A3)^n con n siendo mayor que cero
+                6.Generar 3 palabras validas de forma aleatroia de (\u03A3)1 y (\u03A3)2
+                
+                """)
             else:
                 print("Las palabras no pertenecen a su respectivos alfabetos")
         caracterBuscar=input("Escriba el caracter a buscar:")
@@ -202,4 +227,5 @@ while not salir:
             print("No es palindromo")
     elif opcionMenuPrincipal == 69:
         elevarExponente(primeraPalabra,segundaPalabra)
-
+    elif opcionMenuPrincipal==45:
+        print(generadorPalabrasRandom(alfabeto1,alfabeto2))
