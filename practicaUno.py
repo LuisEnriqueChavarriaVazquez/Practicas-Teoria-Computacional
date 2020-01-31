@@ -93,3 +93,5 @@ while not salir:
         print ("Introduce un numero valido en el rango de opciones")
  
 print ("Fin")
+
+##generar un diccionario para el rango
