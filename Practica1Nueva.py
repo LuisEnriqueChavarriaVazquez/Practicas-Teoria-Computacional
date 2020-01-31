@@ -86,6 +86,7 @@ def perteneceAlfabeto(palabra,alfabeto):
         else:
             pertenece=0
             break
+    return pertenece
 
 #Ciclo para el menu
 
@@ -133,6 +134,13 @@ while not salir:
         print("Abecedario 1:",alfabeto1)
         print("Abecedario 2:",alfabeto2)
     elif opcionMenuPrincipal==3:
-        print("Escriba dos palabras, un perteneciente al primer abecedario (w1) y otra al segundo (w2)")
-        primeraPalabra=input("Escriba palabra 1:")
-        segundaPalabra=input("Escriba palabra 2:")
+        palabrasCorrectas=0
+        while palabrasCorrectas==0:
+            print("Escriba dos palabras, un perteneciente al primer abecedario (w1) y otra al segundo (w2)")
+            primeraPalabra=input("Escriba palabra 1:")
+            segundaPalabra=input("Escriba palabra 2:")
+            if perteneceAlfabeto(primeraPalabra,alfabeto1)==1 and perteneceAlfabeto(segundaPalabra,alfabeto2)==1:
+                print("comensemos")
+            else:
+                print("Las palabras no pertenecen a su respectivos alfabetos")
+            palabrasCorrectas=1
