@@ -13,6 +13,11 @@ numerosList=list(str(i) for i in range(0,10) )
 alfabeto1 = [""]
 alfabeto2 = [""]
 
+#Palabras W1,W2 generales
+primeraPalabra = ''
+segundaPalabra = ''
+
+
 #Validacion del menu
 
 def pedirNumeroEntero():
@@ -108,6 +113,13 @@ def deteccionPalindromo(palabra):
             break
     return palindromoEs
 
+def elevarExponente(primeraPalabra,segundaPalabra):
+    nExponencial = int(input("Indique el valor del exponente n [Puede ser un valor negativo o positivo]"))
+
+    nuevaPalabraExponenciada = primeraPalabra + segundaPalabra
+    nuevaPalabraExponenciada *= nExponencial
+
+    print(nuevaPalabraExponenciada)
 
 
 
@@ -179,3 +191,5 @@ while not salir:
             print("Es palindromo")
         elif deteccionPalindromo(palindromoVerificar)==0:
             print("No es palindromo")
+    elif opcionMenuPrincipal == 69:
+        elevarExponente(primeraPalabra,segundaPalabra)
