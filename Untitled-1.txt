@@ -1,8 +1,0 @@
-#Funcion para elevar al exponente n la concatenacion de dos cadenas.
-def elevarExponente(primeraPalabra,segundaPalabra):
-    nExponencial = int(input("Indique el valor del exponente n [Puede ser un valor negativo o positivo]"))
-
-    nuevaPalabraExponenciada = primeraPalabra + segundaPalabra
-    nuevaPalabraExponenciada *= nExponencial
-
-    print(nuevaPalabraExponenciada)

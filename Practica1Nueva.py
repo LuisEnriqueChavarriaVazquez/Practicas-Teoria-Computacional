@@ -117,21 +117,21 @@ def deteccionPalindromo(palabra):
 
 #ElevacionPalabra
 def elevarExponente(primeraPalabra,segundaPalabra):
-    nExponencial = int(input("Indique el valor del exponente n [Puede ser un valor negativo o positivo]"))
+    nExponencial = int(input("Indique el valor del exponente n [Puede ser un valor negativo o positivo] = "))
 
 #En este parte validamos
-    if nExponencial > 1:
+    if nExponencial >= 1:
         nuevaPalabraExponenciada = primeraPalabra + segundaPalabra
         nuevaPalabraExponenciada *= nExponencial
-    elif nExponencial == 0:
-        print("El resultado de elevar a la cero es el elemento neutro \u03BB")
-    else:
+    elif nExponencial < 0:
         nuevaPalabraExponenciada = primeraPalabra + segundaPalabra
         nuevaPalabraExponenciada = ((nuevaPalabraExponenciada)[::-1])
         nExponencial = (nExponencial * (-1))
         nuevaPalabraExponenciada *= nExponencial
+    else:
+        print("\nEl resultado de elevar a la cero es el elemento neutro (\u03BB)")
 
-    print(nuevaPalabraExponenciada)
+    print("\nEl resultado es : " + nuevaPalabraExponenciada)
 
 #GenerarPalabrasRandom
 def generadorPalabrasRandom(alfabetoEntrada1,alfabetoEntrada2):
