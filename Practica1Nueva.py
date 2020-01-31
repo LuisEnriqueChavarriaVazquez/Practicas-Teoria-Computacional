@@ -116,8 +116,17 @@ def deteccionPalindromo(palabra):
 def elevarExponente(primeraPalabra,segundaPalabra):
     nExponencial = int(input("Indique el valor del exponente n [Puede ser un valor negativo o positivo]"))
 
-    nuevaPalabraExponenciada = primeraPalabra + segundaPalabra
-    nuevaPalabraExponenciada *= nExponencial
+#En este parte validamos
+    if nExponencial > 1:
+        nuevaPalabraExponenciada = primeraPalabra + segundaPalabra
+        nuevaPalabraExponenciada *= nExponencial
+    elif nExponencial == 0:
+        print("El resultado de elevar a la cero es el elemento neutro \u03BB")
+    else:
+        nuevaPalabraExponenciada = primeraPalabra + segundaPalabra
+        nuevaPalabraExponenciada = ((nuevaPalabraExponenciada)[::-1])
+        nExponencial = (nExponencial * (-1))
+        nuevaPalabraExponenciada *= nExponencial
 
     print(nuevaPalabraExponenciada)
 
@@ -193,3 +202,4 @@ while not salir:
             print("No es palindromo")
     elif opcionMenuPrincipal == 69:
         elevarExponente(primeraPalabra,segundaPalabra)
+

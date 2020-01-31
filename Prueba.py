@@ -109,6 +109,9 @@ def elevarExponente(primeraPalabra,segundaPalabra):
 
     print(nuevaPalabraExponenciada)
 
+#Funcion para elevar el alfabeto al exponente N
+
+
 
 
 
@@ -168,8 +171,12 @@ while not salir:
                     palabrasCorrectas=1
                 else:
                     print("Las palabras no pertenecen a su respectivos alfabetos")
-                    
+
         #Ejecutado codigo 100 de prueba para ver si ejecuta la funcion de exponente de manera correcta
         elif opcionMenuPrincipal == 100:
             print("Ejecutado codigo 100 de prueba para ver si ejecuta la funcion de exponente de manera correcta")
             elevarExponente(primeraPalabra,segundaPalabra)
+
+        #Elevar el primer alfabeto a la N
+        elif opcionMenuPrincipal == 200:
+            print("Ejectado codigo 200 de prueba para ver si se ejecuta la funcion de elevar el alfabeto de N")
