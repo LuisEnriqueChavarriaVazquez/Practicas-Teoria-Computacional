@@ -80,13 +80,37 @@ def llenarABC():
 #Metodo para confirmar pertenencia abecedario
 def perteneceAlfabeto(palabra,alfabeto):
     pertenece=0
-    for i in range(0,len(palabra)-1):
-        if palabra[i] in alfabeto:
-            pertenece=1
-        else:
-            pertenece=0
-            break
+    contadorAgrupado=0
+    for i in range(0,len(alfabeto)-1):
+        if palabra.count(alfabeto[i])>0:
+            contadorAgrupado=contadorAgrupado+palabra.count(alfabeto[i])*len(alfabeto[i])
+    if contadorAgrupado==len(palabra):
+        pertenece=1
     return pertenece
+
+def ocurrenciasLetraABC(abecedario,caracter,palabra):
+    if caracter in abecedario:
+        return palabra.count(caracter)
+    else:
+        return -1
+
+def deteccionPalindromo(palabra):
+    palindromoEs=0
+    parteInicio=0
+    parteFinal=len(palabra)-1
+    while parteInicio<parteFinal:
+        if palabra[parteInicio]==palabra[parteFinal]:
+            palindromoEs=1
+            parteInicio=parteInicio+1
+            parteFinal=parteFinal-1
+        else:
+            palindromoEs=0
+            break
+    return palindromoEs
+
+
+
+
 
 #Ciclo para el menu
 
@@ -141,6 +165,17 @@ while not salir:
             segundaPalabra=input("Escriba palabra 2:")
             if perteneceAlfabeto(primeraPalabra,alfabeto1)==1 and perteneceAlfabeto(segundaPalabra,alfabeto2)==1:
                 print("comensemos")
+                palabrasCorrectas=1
             else:
                 print("Las palabras no pertenecen a su respectivos alfabetos")
-            palabrasCorrectas=1
+        caracterBuscar=input("Escriba el caracter a buscar:")
+        if caracterBuscar not in alfabeto1:
+            print("El caracter no pertenence al abecedario 1")
+        else:
+            print("El numero de ocurrencias de ",caracterBuscar," es :",ocurrenciasLetraABC(alfabeto1,caracterBuscar,primeraPalabra))
+        
+        palindromoVerificar=input("Escriba el posible palindromo:")
+        if deteccionPalindromo(palindromoVerificar)==1:
+            print("Es palindromo")
+        elif deteccionPalindromo(palindromoVerificar)==0:
+            print("No es palindromo")
