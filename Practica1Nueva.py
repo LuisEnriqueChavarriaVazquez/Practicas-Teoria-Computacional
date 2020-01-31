@@ -75,7 +75,17 @@ def llenarABC():
         print("Eliga una opcion valida")
     
     return listaEnt
-    
+
+
+#Metodo para confirmar pertenencia abecedario
+def perteneceAlfabeto(palabra,alfabeto):
+    pertenece=0
+    for i in range(0,len(palabra)-1):
+        if palabra[i] in alfabeto:
+            pertenece=1
+        else:
+            pertenece=0
+            break
 
 #Ciclo para el menu
 
@@ -89,8 +99,9 @@ while not salir:
 
             1. Generar Alfabetos (\u03A3).
             2. Leer Alfabetos (\u03A3).
-            3. Limpiar Alfabetos (\u03A3).
-            4. Salir.
+            3. Operaciones con los alfabetos.
+            4. Limpiar Alfabetos (\u03A3).
+            5. Salir.
             
         """)
      
@@ -118,3 +129,10 @@ while not salir:
             print(alfabeto1)
         elif opcionGenerarAlfabetos== 2:
              alfabeto2=llenarABC()
+    elif opcionMenuPrincipal==2:
+        print("Abecedario 1:",alfabeto1)
+        print("Abecedario 2:",alfabeto2)
+    elif opcionMenuPrincipal==3:
+        print("Escriba dos palabras, un perteneciente al primer abecedario (w1) y otra al segundo (w2)")
+        primeraPalabra=input("Escriba palabra 1:")
+        segundaPalabra=input("Escriba palabra 2:")
