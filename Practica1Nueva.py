@@ -18,6 +18,11 @@ alfabeto2 = [""]
 primeraPalabra = ''
 segundaPalabra = ''
 
+#Linea para interfaz de consola
+
+linea = "\u25A0"
+linea *= 5
+
 
 #Validacion del menu
 
@@ -27,10 +32,10 @@ def pedirNumeroEntero():
     num=0
     while(not correcto):
         try:
-            num = int(input("Introduce un numero de opcion que desea: "))
+            num = int(input(f"{linea} Introduzca un numero de opcion que desea = "))
             correcto=True
         except ValueError:
-            print('Error, introduce un numero entero valido')
+            print('Error !!, introduzca un numero entero valido')
      
     return num
 
@@ -38,17 +43,17 @@ def pedirNumeroEntero():
 def llenarABC():
     listaEnt=[]
     opcEntrada=0
-    print("""
+    print(f"""
           
-          Opciones de llenado de abecedario:
+          {linea} Opciones de llenado de abecedario:
           1.Por rango
           2.A mano
     
     """)
     opcEntrada=pedirNumeroEntero()
     if opcEntrada==1:
-        inicio=input("Escriba el inicio del rango:")
-        fin=input("Escriba el fin del rango:")
+        inicio=input(f"{linea} Escriba el inicio del rango:")
+        fin=input(f"{linea} Escriba el fin del rango:")
         indiceInicio=0
         indiceFin=0
         if inicio in numerosList and fin in numerosList:
@@ -56,29 +61,29 @@ def llenarABC():
             if (indiceFin-indiceInicio)>=3:
                 listaEnt=list(numerosList[i] for i in range(indiceInicio,indiceFin))
             else:
-                print("El abecedario debe tener mas de 3 elementos")
+                print(f"{linea}El abecedario debe tener mas de 3 elementos")
         elif inicio in letrasMin and fin in letrasMin:
             indiceInicio,indiceFin=int(letrasMin.index(inicio)),int(letrasMin.index(fin))+1
             if (indiceFin-indiceInicio)>=3:
                 listaEnt=list(letrasMin[i] for i in range(indiceInicio,indiceFin))
             else:
-                print("El abecedario debe tener mas de 3 elementos")
+                print(f"{linea}El abecedario debe tener mas de 3 elementos")
         elif inicio in letrasMay and fin in letrasMay:
             indiceInicio,indiceFin=int(letrasMay.index(inicio)),int(letrasMay.index(fin))+1
             if (indiceFin-indiceInicio)>=3:
                 listaEnt=list(letrasMay[i] for i in range(indiceInicio,indiceFin))
             else:
-                print("El abecedario debe tener mas de 3 elementos")
+                print(f"{linea}El abecedario debe tener mas de 3 elementos")
         else:
-            print("Los parametros de rango no pertenenecen al mismo alfabeto")
+            print(f"{linea}Los parametros de rango no pertenenecen al mismo alfabeto")
     elif opcEntrada==2:
-        listaAyuda=input("Escriba los elemntos:").split()
+        listaAyuda=input(f"{linea}Escriba los elementos:").split()
         if len(listaAyuda)>=3:
             listaEnt=listaAyuda
         else:
-            print("El abecedario debe tener mas de 3 elementos")
+            print(f"{linea}El abecedario debe tener mas de 3 elementos")
     else:
-        print("Eliga una opcion valida")
+        print(f"{linea}Eliga una opcion valida")
     
     return listaEnt
 
@@ -117,7 +122,7 @@ def deteccionPalindromo(palabra):
 
 #ElevacionPalabra
 def elevarExponente(primeraPalabra,segundaPalabra):
-    nExponencial = int(input("Indique el valor del exponente n [Puede ser un valor negativo o positivo] = "))
+    nExponencial = int(input(f"{linea}Indique el valor del exponente n [Puede ser un valor negativo o positivo] = "))
 
 #En este parte validamos
     if nExponencial >= 1:
@@ -131,7 +136,7 @@ def elevarExponente(primeraPalabra,segundaPalabra):
     #else:
         #print("\nEl resultado de elevar a la cero es el elemento neutro (\u03BB)")  ///
 
-    print("\nEl resultado es : " + nuevaPalabraExponenciada)
+    print(f"{linea}\nEl resultado es : " + nuevaPalabraExponenciada)
 
 #Elevar un alfabeto N veces
 
@@ -148,32 +153,32 @@ def potenciaAlfabeto(numero,alfabeto,base):
 
 def elevaAlfabetoPotencia(alfabeto1):
     while 1 == 1:
-        nExponencialAlfabeto = int(input("¿Cuantas veces desea elevar el alfabeto 1?"))
+        nExponencialAlfabeto = int(input(f"{linea}¿Cuantas veces desea elevar a un exponente el alfabeto"))
         try:
             if nExponencialAlfabeto > 0:
                 break
             print ("El numero es correcto")
         except ValueError:
-            print("entrada incorrecta")
+            print("El numero es incorrecto")
     potenciaAlfabeto(nExponencialAlfabeto,alfabeto1,"")
 
 #sufijos,prefijos y subcadenas
 def encontrarPrefijoSufijoSubcadena(palabra,subPalabra):
-    if subPalabra in palabra or subPalabra =="":
+    if subPalabra in palabra or subPalabra == "":
         if palabra.startswith(subPalabra):  
             if palabra.endswith(subPalabra):
-                return "Es un subfijo, prefijo y subcadena"
+                return f"{linea}Es un subfijo, prefijo y subcadena"
             else:
-                return "Es un prefijo"
+                return f"{linea}Es un prefijo"
 
         elif palabra.endswith(subPalabra):
-            return "Es un subfijo"
+            return f"{linea}Es un sufijo"
 
         else:
-            return "Es una subcadena"
+            return f"{linea}Es una subcadena"
     
     else:
-        return "No es una subcadena"
+        return f"{linea}No es una subcadena"
 
 
 
@@ -203,17 +208,16 @@ salir = False
 opcionMenuPrincipal = 0
 while not salir:
  
-    print("""
-            Menu principal:
-            1. Generar Alfabetos (\u03A3).
-            2. Leer Alfabetos (\u03A3).
-            3. Operaciones con los alfabetos.
-            4. Limpiar Alfabetos (\u03A3).
-            5. Salir.
-            
+    print(f"""
+            {linea} Menu principal:
+                [1] Generar Alfabetos (\u03A3).
+                [2] Leer Alfabetos (\u03A3).
+                [3] Operaciones disponibles para los alfabetos.
+                [4] Limpiar Alfabetos (\u03A3).
+                [5] Salir.  
         """)
      
-    print ("Elige una opcion")
+    print (f"{linea} Seleccione la opción.")
 
     opcionMenuPrincipal = pedirNumeroEntero()
 
@@ -221,8 +225,8 @@ while not salir:
         
         opcionGenerarAlfabetos=0
 
-        print("""
-            Menu generar alfabetos:
+        print(f"""
+            {linea} Menu generar alfabetos:
             1.Generar Alfabeto 1
             2.Generar Alfabeto 2     
          """)
@@ -235,46 +239,61 @@ while not salir:
         elif opcionGenerarAlfabetos== 2:
              alfabeto2=llenarABC()
     elif opcionMenuPrincipal==2:
-        print("Abecedario 1:",alfabeto1)
-        print("Abecedario 2:",alfabeto2)
+        print("\u25A0 Abecedario 1:",alfabeto1)
+        print("\u25A0 Abecedario 2:",alfabeto2)
     elif opcionMenuPrincipal==3:
         palabrasCorrectas=0
         while palabrasCorrectas==0:
             print("Escriba dos palabras, un perteneciente al primer abecedario (w1) y otra al segundo (w2)")
-            primeraPalabra=input("Escriba palabra 1:")
-            segundaPalabra=input("Escriba palabra 2:")
+            primeraPalabra=input(f"{linea} Escriba la palabra w1 = ")
+            segundaPalabra=input(f"{linea} Escriba la palabra w2 = ")
             if perteneceAlfabeto(primeraPalabra,alfabeto1)==1 and perteneceAlfabeto(segundaPalabra,alfabeto2)==1:
-                palabrasCorrectas=1
-                print("""
+                salir_2 = False
+                while not salir_2:
+                    palabrasCorrectas=1
+                    opcionMenuPrincipal_2 = 0
+                    print("""
                 
-               Datos de salida con las palabras 
+                    Datos de salida con las palabras 
                 
-                1.Escribir (w1w2) ^n con n siendo postiva o negativa
-                2. Numero de ocurrencias de un caracter a seleccionar en w1
-                3.Indicador si w1 es un prefijo,subfijo,subcadena o subsencuencia de w2
-                4.Verificar si una palabra es un palindromo
-                5.Generar  (\u03A3)^n con n siendo mayor que cero
-                6.Generar 3 palabras validas de forma aleatroia de (\u03A3)1 y (\u03A3)2
+                    [1] Escribir (w1w2) ^n con n siendo postiva o negativa
+                    [2] Numero de ocurrencias de un caracter a seleccionar en w1
+                    [3] Indicador si w1 es un prefijo,subfijo,subcadena o subsencuencia de w2
+                    [4] Verificar si una palabra es un palindromo
+                    [5] Generar  (\u03A3)^n con n siendo mayor que cero
+                    [6] Generar 3 palabras validas de forma aleatroia de (\u03A3)1 y (\u03A3)2
+                    [7] Salir de este menu
                 
-                """)
+                    """)
+                    
+                    opcionMenuPrincipal_2 = int(input(f"{linea}Seleccione una opcion ="))
+
+                    if  opcionMenuPrincipal_2 == 1:
+                        elevarExponente(primeraPalabra,segundaPalabra)
+                    elif opcionMenuPrincipal_2 == 2:
+                        caracterBuscar=input("Escriba el caracter a buscar:")
+                        if caracterBuscar not in alfabeto1:
+                            print(f"{linea} El caracter no pertenence al abecedario 1")
+                        else:
+                            print(f"{linea}El numero de ocurrencias de ",caracterBuscar," es :",ocurrenciasLetraABC(alfabeto1,caracterBuscar,primeraPalabra))
+                    elif opcionMenuPrincipal_2 == 3:
+                        print(encontrarPrefijoSufijoSubcadena(segundaPalabra,primeraPalabra))
+                    elif opcionMenuPrincipal_2 == 4:
+                        palindromoVerificar=input("Escriba el posible palindromo:")
+                        if deteccionPalindromo(palindromoVerificar)==1:
+                            print(f"{linea}Es palindromo")
+                        elif deteccionPalindromo(palindromoVerificar)==0:
+                            print(f"{linea}No es palindromo")
+                    elif opcionMenuPrincipal_2 == 5:
+                        elevaAlfabetoPotencia(alfabeto1)
+                    elif opcionMenuPrincipal_2 == 6:
+                        print(generadorPalabrasRandom(alfabeto1,alfabeto2))
+                    elif opcionMenuPrincipal_2 == 7:
+                        salir_2 = True
             else:
-                print("Las palabras no pertenecen a su respectivos alfabetos")
-        caracterBuscar=input("Escriba el caracter a buscar:")
-        if caracterBuscar not in alfabeto1:
-            print("El caracter no pertenence al abecedario 1")
-        else:
-            print("El numero de ocurrencias de ",caracterBuscar," es :",ocurrenciasLetraABC(alfabeto1,caracterBuscar,primeraPalabra))
-        
-        palindromoVerificar=input("Escriba el posible palindromo:")
-        if deteccionPalindromo(palindromoVerificar)==1:
-            print("Es palindromo")
-        elif deteccionPalindromo(palindromoVerificar)==0:
-            print("No es palindromo")
-    elif opcionMenuPrincipal == 69:
-        elevarExponente(primeraPalabra,segundaPalabra)
-    elif opcionMenuPrincipal == 24:
-        elevaAlfabetoPotencia(alfabeto1)
-    elif opcionMenuPrincipal == 12:
-        print(encontrarPrefijoSufijoSubcadena(segundaPalabra,primeraPalabra))
-    elif opcionMenuPrincipal==45:
-        print(generadorPalabrasRandom(alfabeto1,alfabeto2))
+                print(f"{linea}Las palabras no pertenecen a su respectivos alfabetos")
+    elif opcionMenuPrincipal == 4:
+        alfabeto1 = []
+        alfabeto2 = []
+    elif opcionMenuPrincipal == 5:
+        salir = True
