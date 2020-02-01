@@ -290,6 +290,8 @@ while not salir:
                         print(generadorPalabrasRandom(alfabeto1,alfabeto2))
                     elif opcionMenuPrincipal_2 == 7:
                         salir_2 = True
+                    else:
+                        print("Por favor ingrese un valor valido.")
             else:
                 print(f"{linea}Las palabras no pertenecen a su respectivos alfabetos")
     elif opcionMenuPrincipal == 4:
@@ -297,3 +299,5 @@ while not salir:
         alfabeto2 = []
     elif opcionMenuPrincipal == 5:
         salir = True
+    else:
+        print("Por favor ingrese un valor valido")
