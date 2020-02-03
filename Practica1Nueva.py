@@ -164,23 +164,52 @@ def elevaAlfabetoPotencia(alfabeto1):
 
 #sufijos,prefijos y subcadenas
 def encontrarPrefijoSufijoSubcadena(palabra,subPalabra):
-    if subPalabra in palabra or subPalabra == "":
-        if palabra.startswith(subPalabra):  
-            if palabra.endswith(subPalabra):
-                return f"{linea}Es un subfijo, prefijo y subcadena"
+    if subPalabra in palabra: #Validamos si se encuentra en la palabra
+        if palabra == subPalabra or subPalabra == "": #validamos si no es del tipo propio
+            if palabra.startswith(subPalabra):  #validamos la parte de sufijos, prefijos y subacadenas no propias
+                if palabra.endswith(subPalabra):
+                    return f"{linea}Es un subfijo, prefijo y subcadena"
+                else:
+                    return f"{linea}Es un prefijo"
+            elif palabra.endswith(subPalabra):
+                return f"{linea}Es un sufijo"
+
             else:
-                return f"{linea}Es un prefijo"
+                return f"{linea}Es una subcadena"
+        else: #parte donde daremos tratamiento a las propias
+            if palabra.startswith(subPalabra):  
+                if palabra.endswith(subPalabra):
+                    return f"{linea}Es un subfijo, prefijo y subcadena propia"
+                else:
+                    return f"{linea}Es un prefijo propio"
+            elif palabra.endswith(subPalabra):
+                return f"{linea}Es un sufijo propio"
 
-        elif palabra.endswith(subPalabra):
-            return f"{linea}Es un sufijo"
-
-        else:
-            return f"{linea}Es una subcadena"
-    
+            else:
+                return f"{linea}Es una subcadena propia"
     else:
-        return f"{linea}No es una subcadena"
+        #Validar la subsecuencia
+        p1 = len(subPalabra) 
+        p2 = len(palabra) 
+        if verificarSubsecuencia(subPalabra, palabra, p1, p2): 
+            return("Es una subsecuencia")
+        else: 
+            return("No es subsecuencia ni tampoco un prefijo,sufijo o subcadena ya que algun caracter no encaja")
+        
 
-
+def verificarSubsecuencia(primeraPalabra, segundaPalabra, p1, p2): 
+    # casos base
+    if p1 == 0:    
+        return True
+    if p2 == 0:    
+        return False
+  
+    # Verificar si los caracteres empatan
+    if primeraPalabra[p1-1] == segundaPalabra[p2-1]: 
+        return verificarSubsecuencia(primeraPalabra, segundaPalabra, p1-1, p2-1) 
+  
+    # Verificar si los caracteres no empatan
+    return verificarSubsecuencia(primeraPalabra, segundaPalabra, p1, p2-1) 
 
 
 #GenerarPalabrasRandom
