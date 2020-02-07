@@ -114,7 +114,7 @@ def llenarABC():
 def perteneceAlfabeto(palabra,alfabeto):
     pertenece=0
     contadorAgrupado=0
-    for i in range(0,len(alfabeto)-1):
+    for i in range(0,len(alfabeto)):
         if palabra.count(alfabeto[i])>0:
             contadorAgrupado=contadorAgrupado+palabra.count(alfabeto[i])*len(alfabeto[i])
     if contadorAgrupado==len(palabra):
