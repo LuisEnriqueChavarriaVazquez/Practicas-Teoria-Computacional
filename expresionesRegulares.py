@@ -5,19 +5,68 @@ regexRFC ='^([A-Z]{4}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01]))'#No esta com
 
 def checkCorreo(correo):
     if(re.match(regexMail,correo)):
-        print("Correo Valido")
+        print("\n### Correo Valido")
     else:
-        print("Correo Invalido")
+        print("\n### Correo Invalido")
 
 def checkCURP(CURP):
     if(re.match(regexCURP,CURP)):
-        print("CURP Valido")
+        print("\n### CURP Valido")
     else:
-        print("CURP Invalido")
+        print("\n### CURP Invalido")
 
 def checkRFC(RFC):
     if(re.match(regexRFC,RFC)):
-        print("RFC Valido")
+        print("\n### RFC Valido")
     else:
-        print("RFC Invalido")
+        print("\n### RFC Invalido")
 
+ 
+def pedirNumeroEntero():
+ 
+    correcto=False
+    num=0
+    while(not correcto):
+        try:
+            num = int(input("Introduce alguna opcion: "))
+            correcto=True
+        except ValueError:
+            print('Error, introduce un numero entero')
+     
+    return num
+ 
+salir = False
+opcion = 0
+ 
+while not salir:
+ 
+    print("""
+
+/// Bienvenido al validador de expresiones regulares!!!
+        
+        Seleccione alguna opcion:
+        [1] Validar EMAIL
+        [2] Validar CURP
+        [3] Validar RFC
+        [4] Salir
+        
+    """)
+ 
+    opcion = pedirNumeroEntero()
+ 
+    if opcion == 1:
+        email_value = str(input("Escriba algun EMAIL para validar == "))
+        checkCorreo(email_value)
+    elif opcion == 2:
+        curp_value = str(input("Escriba algun CURP para validar == "))
+        checkCURP(curp_value)
+    elif opcion == 3:
+        rfc_value = str(input("Escriba algun RFC para validar == "))
+        checkRFC(rfc_value)
+    elif opcion == 4:
+        salir = True
+    else:
+        print ("Introduce un numero entre 1 y 3")
+ 
+print ("Fin")
+    
