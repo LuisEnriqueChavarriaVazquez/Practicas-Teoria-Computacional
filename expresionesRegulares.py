@@ -2,6 +2,7 @@ import re
 regexMail = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
 regexCURP = '^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$'
 regexRFC ='^([A-Z]{4}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01]))'#No esta completa tenog dudas con la homoclave del RFC
+regexIP="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
 regexURL = '^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?'
 
 
@@ -30,6 +31,12 @@ def checkURL(URL):
     else:
         print("\n## URL No valido")
 
+def checkIP(IP):
+    if(re.match(regexIP,IP)):
+        print("\n## IP Valido")
+    else:
+        print("\n## IP No valido")
+
  
 def pedirNumeroEntero():
  
@@ -50,13 +57,12 @@ opcion = 0
 while not salir:
  
     print("""
-
 /// Bienvenido al validador de expresiones regulares!!!
         
         Seleccione alguna opcion:
         [1] Validar EMAIL
         [2] Validar CURP
-        [3] Validar RFC
+        [3] Validar IP
         [4] Validar URL
         [5] Salir
         
@@ -71,8 +77,8 @@ while not salir:
         curp_value = str(input("Escriba algun CURP para validar == "))
         checkCURP(curp_value)
     elif opcion == 3:
-        rfc_value = str(input("Escriba algun RFC para validar == "))
-        checkRFC(rfc_value)
+        ip_value = str(input("Escriba algun IP para validar == "))
+        checkIP(ip_value)
     elif opcion == 4:
         url_value = str(input("Escriba el URL que desea verificar == "))
     elif opcion == 5:
@@ -81,4 +87,3 @@ while not salir:
         print ("Introduce un numero entre 1 y 3")
  
 print ("Fin")
-    
