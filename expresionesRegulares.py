@@ -1,7 +1,7 @@
 import re 
 regexMail = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
 regexCURP = '^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$'
-regexRFC ='^([A-Z]{4}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01]))'#No esta completa tenog dudas con la homoclave del RFC
+regexIP ='\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}[^0-9]'
 regexURL = '^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?'
 
 
@@ -18,11 +18,11 @@ def checkCURP(CURP):
     else:
         print("\n### CURP Invalido")
 
-def checkRFC(RFC):
-    if(re.match(regexRFC,RFC)):
-        print("\n### RFC Valido")
+def checkIP(IP):
+    if(re.match(regexIP,IP)):
+        print("\n### IP Valido")
     else:
-        print("\n### RFC Invalido")
+        print("\n### IP Invalido")
     
 def checkURL(URL):
     if(re.match(regexURL,URL)):
@@ -56,7 +56,7 @@ while not salir:
         Seleccione alguna opcion:
         [1] Validar EMAIL
         [2] Validar CURP
-        [3] Validar RFC
+        [3] Validar IP
         [4] Validar URL
         [5] Salir
         
@@ -71,8 +71,8 @@ while not salir:
         curp_value = str(input("Escriba algun CURP para validar == "))
         checkCURP(curp_value)
     elif opcion == 3:
-        rfc_value = str(input("Escriba algun RFC para validar == "))
-        checkRFC(rfc_value)
+        ip_value = str(input("Escriba algun IP para validar == "))
+        checkIP(ip_value)
     elif opcion == 4:
         url_value = str(input("Escriba el URL que desea verificar == "))
     elif opcion == 5:
