@@ -1,7 +1,7 @@
 import re 
 regexMail = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
 regexCURP = '^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$'
-regexRFC ='^([A-Z]{4}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01]))'#No esta completa tenog dudas con la homoclave del RFC
+
 regexIP="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
 regexURL = '^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?'
 
@@ -18,12 +18,6 @@ def checkCURP(CURP):
         print("\n### CURP Valido")
     else:
         print("\n### CURP Invalido")
-
-def checkRFC(RFC):
-    if(re.match(regexRFC,RFC)):
-        print("\n### RFC Valido")
-    else:
-        print("\n### RFC Invalido")
     
 def checkURL(URL):
     if(re.match(regexURL,URL)):
