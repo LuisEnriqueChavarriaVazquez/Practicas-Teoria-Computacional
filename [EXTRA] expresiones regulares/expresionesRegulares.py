@@ -1,4 +1,9 @@
+from tkinter import messagebox
 import re 
+import sys
+#from PyQt5 import QtCore, QtGui, QtWidgets, uic
+#from windowProyectoExpresiones import Ui_MainWindow 
+
 regexMail = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
 regexCURP = '^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$'
 regexIP="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
@@ -11,27 +16,30 @@ regexURL = '(^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[a-fA-F][a-fA
 
 def checkCorreo(correo):
     if(re.match(regexMail,correo)):
-        print("\n### Correo Valido")
+        mensaje("\n### Correo Valido")
     else:
-        print("\n### Correo Invalido")
+        mensaje("\n### Correo Invalido")
 
 def checkCURP(CURP):
     if(re.match(regexCURP,CURP)):
-        print("\n### CURP Valido")
+        mensaje("\n### CURP Valido")
     else:
-        print("\n### CURP Invalido")
+        mensaje("\n### CURP Invalido")
     
 def checkURL(URL):
     if(re.match(regexURL,URL)):
-        print("\n## URL Valido")
+        mensaje("\n## URL Valido")
     else:
-        print("\n## URL No valido")
+        mensaje("\n## URL No valido")
 
 def checkIP(IP):
     if(re.match(regexIP,IP)):
-        print("\n## IP Valido")
+        mensaje("\n## IP Valido")
     else:
-        print("\n## IP No valido")
+        mensaje("\n## IP No valido")
+
+def mensaje(mensaje_value):
+    messagebox.showinfo(message=mensaje_value, title="Validacion")
 
  
 def pedirNumeroEntero():
@@ -84,3 +92,16 @@ while not salir:
         print ("Introduce un numero entre 1 y 3")
  
 print ("Fin")
+
+
+#######Prototipo de interfaz anterior
+"""class mywindow(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(mywindow, self).__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+ 
+app = QtWidgets.QApplication([])
+application = mywindow()
+application.show()
+sys.exit(app.exec())"""
