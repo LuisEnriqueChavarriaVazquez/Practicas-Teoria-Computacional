@@ -147,6 +147,23 @@ def potenciaAlfabeto(numero,alfabetoEntrada,base):
         for palabra in alfabetoEntrada:
             print(base + str(palabra), end = ",") #Para la parte de los espacio end no permite que haga salto de linea
 
+##Union del lenguaje
+def unionLenguajes(lenguaje1,lenguaje2):
+    lenguajeUnido = lenguaje1 + lenguaje2
+    #Eliminacion de elementos repetidos
+    return set(lenguajeUnido)
+
+##Concatenacion del lenguaje // Todavia no esta listo 
+def concatenacionLenguajes(lenguaje1,lenguaje2):
+    lenguajeUnidoConcat = lenguaje1 + lenguaje2
+    lenguajeConcatenado = []
+    contador = 0
+    for elemento in lenguajeUnidoConcat:
+        lenguajeConcatenado[contador] = lenguajeUnidoConcat[elemento] + lenguajeUnidoConcat[1]
+        contador += 1
+    return lenguajeConcatenado
+
+
 #Ciclo para el menu
 salir = False
 opcionMenuPrincipal = 0
@@ -221,9 +238,10 @@ while not salir:
             """)
             opcionOperaLenguajes=pedirNumeroEntero()
             if opcionOperaLenguajes==1:
-                pass
+                print("""El resultado de la union de L1 y L2 es...""")
+                print(unionLenguajes(lenguaje1,lenguaje2))
             elif opcionOperaLenguajes==2:
-                pass
+                print(concatenacionLenguajes(lenguaje1,lenguaje2))
             elif opcionOperaLenguajes==3:
                 pass
             elif opcionOperaLenguajes==4:
