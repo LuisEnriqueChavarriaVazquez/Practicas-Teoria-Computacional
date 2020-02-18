@@ -155,13 +155,9 @@ def unionLenguajes(lenguaje1,lenguaje2):
 
 ##Concatenacion del lenguaje // Todavia no esta listo 
 def concatenacionLenguajes(lenguaje1,lenguaje2):
-    lenguajeUnidoConcat = lenguaje1 + lenguaje2
-    lenguajeConcatenado = []
-    contador = 0
-    for elemento in lenguajeUnidoConcat:
-        lenguajeConcatenado[contador] = lenguajeUnidoConcat[elemento] + lenguajeUnidoConcat[1]
-        contador += 1
-    return lenguajeConcatenado
+    for i in lenguaje1:
+        for j in lenguaje2:
+            print(i + j, end = ",")
 
 
 #Ciclo para el menu
@@ -241,7 +237,8 @@ while not salir:
                 print("""El resultado de la union de L1 y L2 es...""")
                 print(unionLenguajes(lenguaje1,lenguaje2))
             elif opcionOperaLenguajes==2:
-                print(concatenacionLenguajes(lenguaje1,lenguaje2))
+                print("La lista concatenada es la siguiente == ")
+                concatenacionLenguajes(lenguaje1,lenguaje2)
             elif opcionOperaLenguajes==3:
                 pass
             elif opcionOperaLenguajes==4:
