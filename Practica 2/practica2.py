@@ -231,15 +231,15 @@ while not salir:
         salidaMenuOperaLenguajes=0
         opcionOperaLenguajes=0
         while(salidaMenuOperaLenguajes==0):
-            print("""
-            Eliga una de las opcciones:
-            [1] Lenguaje resultado de la unión del lenguaje 1 y el lenguaje 2
-            [2] Lenguaje resultado de la concatenacion del lenguaje 1 y el lenguaje 2
-            [3] Lenguaje resultado de la diferencia del lenguaje 1 y el lenguaje 2
-            [4] Lenguaje potencia del lenguaje 1 o lenguaje 2 con potencia entre +5 y -5
-            [5] CURP Aleatoria
-            [6] Expresiones reguales extra
-            [7] Salir
+            print(f"""
+            {linea}[Menu Opcion 3] Eliga una de las opcciones:
+                [1] Lenguaje resultado de la unión del lenguaje 1 y el lenguaje 2
+                [2] Lenguaje resultado de la concatenacion del lenguaje 1 y el lenguaje 2
+                [3] Lenguaje resultado de la diferencia del lenguaje 1 y el lenguaje 2
+                [4] Lenguaje potencia del lenguaje 1 o lenguaje 2 con potencia entre +5 y -5
+                [5] CURP Aleatoria
+                [6] Expresiones reguales extra
+                [7] Salir
             """)
             opcionOperaLenguajes=pedirNumeroEntero()
             if opcionOperaLenguajes==1:
