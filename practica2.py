@@ -110,7 +110,6 @@ def checarPosibAlfabeto(alfabetoEntr,longitudPalabrasEsperado):
     
     
 #Metodo generar lenguaje aleatorio
-
 def randomLenguaje(numeroPalabras,longitudPalabras,alfabetoEnt):
     lenguajeSalida=[]
     for i in range(0,int(numeroPalabras)):
@@ -124,8 +123,29 @@ def randomLenguaje(numeroPalabras,longitudPalabras,alfabetoEnt):
     return lenguajeSalida
 
 
+def elevaAlfabetoPotencia(alfabetoEntrada,exponente):
+    if exponente==0:
+        print("[ ]")
+    elif exponente <= 5 and exponente > 0 :
+        potenciaAlfabeto(exponente,alfabetoEntrada,"")
+    elif exponente >= -5 and exponente < 0:
+        alfabetoReverse=list(alfabetoEntrada[i] [::-1] for i in range(0,len(alfabetoEntrada)-1))
+        potenciaAlfabeto(exponente,alfabetoReverse,"")
+    else:
+        print("Escriba un valor entre 5 y -5")
+    
 
-
+def potenciaAlfabeto(numero,alfabetoEntrada,base):
+    if numero == 0:
+        print("")
+        return
+    if numero > 1:
+        for palabra in alfabetoEntrada:
+            potenciaAlfabeto((numero-1),alfabetoEntrada,base + str(palabra)) #n PARAMETRO QUE NOS AYUDA CON LOS CASOS BASE
+            # PALABRA CONCATENADA CON LA BASE PARA PODER QUE LOS GRUPOS TENGAN SENTIDO
+    else:
+        for palabra in alfabetoEntrada:
+            print(base + str(palabra), end = ",") #Para la parte de los espacio end no permite que haga salto de linea
 
 #Ciclo para el menu
 salir = False
@@ -136,8 +156,8 @@ while not salir:
             {linea} Menu principal:
                 [1] Generar Alfabeto (\u03A3).
                 [2] Generar lenguajes (\u03A3).
-                [3] Operaciones disponibles para los alfabetos.
-                [4] Limpiar Alfabetos (\u03A3).
+                [3] Operaciones disponibles para los lenguajes.
+                [4] Limpiar lenguajes (\u03A3).
                 [5] Salir.  
         """)
      
@@ -185,7 +205,37 @@ while not salir:
 
             lenguaje2=randomLenguaje(numeroPalabrasAlf2,longitudPalabrasAlf2,alfabetoRef)
             print("El lenguaje 2 es:",lenguaje2)
-
+    elif opcionMenuPrincipal == 3:
+        salidaMenuOperaLenguajes=0
+        opcionOperaLenguajes=0
+        while(salidaMenuOperaLenguajes==0):
+            print("""
+            Eliga una de las opcciones:
+            [1] Lenguaje resultado de la unión del lenguaje 1 y el lenguaje 2
+            [2] Lenguaje resultado de la concatenacion del lenguaje 1 y el lenguaje 2
+            [3] Lenguaje resultado de la diferencia del lenguaje 1 y el lenguaje 2
+            [4] Lenguaje potencia del lenguaje 1 o lenguaje 2 con potencia entre +5 y -5
+            [5] CURP Aleatoria
+            [6] Expresiones reguales extra
+            [7] Salir
+            """)
+            opcionOperaLenguajes=pedirNumeroEntero()
+            if opcionOperaLenguajes==1:
+                pass
+            elif opcionOperaLenguajes==2:
+                pass
+            elif opcionOperaLenguajes==3:
+                pass
+            elif opcionOperaLenguajes==4:
+                pass
+            elif opcionOperaLenguajes==5:
+                pass
+            elif opcionOperaLenguajes==6:
+                salidaMenuOperaLenguajes=1
+       
+    elif opcionMenuPrincipal == 4:
+        lenguaje1=[]
+        lenguaje2=[]
     elif opcionMenuPrincipal == 5:
         salir = True
     else:
