@@ -159,6 +159,13 @@ def concatenacionLenguajes(lenguaje1,lenguaje2):
         for j in lenguaje2:
             print(i + j, end = ",")
 
+#Resta de elementos (LENGUAJES1 Y LENGUAJES2)
+def restaLenguajes(lenguaje1,lenguaje2):
+    resta =[]    
+    for palabra in lenguaje1:
+        if palabra not in lenguaje2:
+            resta.append(palabra)     
+    return resta
 
 #Ciclo para el menu
 salir = False
@@ -169,9 +176,11 @@ while not salir:
             {linea} Menu principal:
                 [1] Generar Alfabeto (\u03A3).
                 [2] Generar lenguajes (\u03A3).
-                [3] Operaciones disponibles para los lenguajes.
+                [3] Operaciones disponibles para los lenguajes.                
                 [4] Limpiar lenguajes (\u03A3).
-                [5] Salir.  
+                [5] Muestra las listas creadas (L1 & L2).
+                [6] Muestra los alfabetos.
+                [7] Salir.  
         """)
      
     print (f"{linea} Seleccione la opción.")
@@ -240,18 +249,31 @@ while not salir:
                 print("La lista concatenada es la siguiente == ")
                 concatenacionLenguajes(lenguaje1,lenguaje2)
             elif opcionOperaLenguajes==3:
-                pass
+                restaLenguajesValue1 = restaLenguajes(lenguaje1,lenguaje2)
+                print("La resta R1 del lenguaje es (L1-L2) == ")
+                print(restaLenguajesValue1)
+
+                restaLenguajesValue2 = restaLenguajes(lenguaje2,lenguaje1)
+                print("La resta R2 del lenguaje es (L2-L1) == ")
+                print(restaLenguajesValue2)
             elif opcionOperaLenguajes==4:
                 pass
             elif opcionOperaLenguajes==5:
                 pass
             elif opcionOperaLenguajes==6:
+                pass
+            elif opcionOperaLenguajes==7:
                 salidaMenuOperaLenguajes=1
-       
     elif opcionMenuPrincipal == 4:
-        lenguaje1=[]
-        lenguaje2=[]
+       lenguaje1 = []
+       lenguaje2 = []
     elif opcionMenuPrincipal == 5:
+        print(lenguaje1)
+        print(lenguaje2)
+
+    elif opcionMenuPrincipal == 6:
+        print(alfabetoRef) 
+    elif opcionMenuPrincipal == 7:
         salir = True
     else:
         print("Por favor ingrese un valor valido")
