@@ -19,7 +19,7 @@ letrasMin=list(string.ascii_lowercase) #estamos guardando todo el conjunto de el
 numerosList=list(str(i) for i in range(0,10) )
 
 #Inicializando listas vacias
-alfabeto = [""]
+alfabetoRef = [""]
 
 #Lenguajes vacios
 lenguaje1=[""]
@@ -46,6 +46,12 @@ def pedirNumeroEntero():
      
     return num
 
+def valorPositivo(numeroEntr):
+
+    if int(numeroEntr)>0:
+        return 1
+    else:
+        return 0
 
 #Metodo para llenar abecedario
 def llenarABC():
@@ -96,23 +102,25 @@ def llenarABC():
     return listaEnt
 
 #Checar si se puede generar palabras con una longitud especifica
-def checarPosibAlfabeto(alfabeto,longitudPalabrasEsperado):
+def checarPosibAlfabeto(alfabetoEntr,longitudPalabrasEsperado):
     minPosible=0
-    for i in range(0,len(alfabeto)-1):
-        if minPosible<alfabeto[i]:
-            minPosible=len(alfabeto[i])
+    for i in range(0,len(alfabetoEntr)-1):
+        if minPosible<alfabetoEntr[i]:
+            minPosible=len(alfabetoEntr[i])
     
     
 #Metodo generar lenguaje aleatorio
 
 def randomLenguaje(numeroPalabras,longitudPalabras,alfabetoEnt):
     lenguajeSalida=[]
-    for i in range(0,numeroPalabras-1):
+    for i in range(0,int(numeroPalabras)):
         palabraPosible=""
-        while(len(palabraPosible)< longitudPalabras):
+        while(len(palabraPosible)< int(longitudPalabras)):
             palabraSeleccion=alfabetoEnt[random.randrange(0,len(alfabetoEnt))]
             palabraPosible=palabraPosible+palabraSeleccion
-        lenguajeSalida[i]=palabraPosible
+        print(palabraPosible)
+        print(lenguajeSalida)
+        lenguajeSalida.append(palabraPosible)
     return lenguajeSalida
 
 
@@ -139,9 +147,44 @@ while not salir:
 
 ##Validacion para la opcion 3 ##COMPRUEBA QUE INGRESEMOS ELEMENTOS VALIDOS PARA EL ALFABETO 1 Y 2
     if opcionMenuPrincipal == 1:
-       alfabeto=llenarABC()
-       print("EL alfabeto es ",alfabeto)
+       alfabetoRef=llenarABC()
+       print("EL alfabeto es ",alfabetoRef)
     elif opcionMenuPrincipal == 2:
+        opcionAlfabetos=0
+        print("Escriba la opccion deseasa")
+        print("[1]Generar el lenguaje 1")
+        print("[2]Generar el lenguaje 2")
+        opcionAlfabetos=pedirNumeroEntero()
+        if (opcionAlfabetos==1):
+            numerosPositivos=0
+            numeroPalabrasAlf1=0
+            longitudPalabrasAlf1=0
+            while(numerosPositivos==0):
+                numeroPalabrasAlf1=input("Escriba el numero de palabras:")
+                longitudPalabrasAlf1=input("Escriba la longitud de palabras:")
+                if(valorPositivo(numeroPalabrasAlf1)==1 and valorPositivo(longitudPalabrasAlf1)==1):
+                    numerosPositivos=1
+                else:
+                    print("Escriba valores correctos")
+                    numerosPositivos=0
+
+            lenguaje1=randomLenguaje(numeroPalabrasAlf1,longitudPalabrasAlf1,alfabetoRef)
+            print("El lenguaje 1 es:",lenguaje1)
+        elif (opcionAlfabetos==2):
+            numerosPositivos=0
+            numeroPalabrasAlf2=0
+            longitudPalabrasAlf2=0
+            while(numerosPositivos==0):
+                numeroPalabrasAlf2=input("Escriba el numero de palabras:")
+                longitudPalabrasAlf2=input("Escriba la longitud de palabras:")
+                if(valorPositivo(numeroPalabrasAlf2)==1 and valorPositivo(longitudPalabrasAlf2)==1):
+                    numerosPositivos=1
+                else:
+                    print("Escriba valores correctos")
+                    numerosPositivos=0
+
+            lenguaje2=randomLenguaje(numeroPalabrasAlf2,longitudPalabrasAlf2,alfabetoRef)
+            print("El lenguaje 2 es:",lenguaje2)
 
     elif opcionMenuPrincipal == 5:
         salir = True
