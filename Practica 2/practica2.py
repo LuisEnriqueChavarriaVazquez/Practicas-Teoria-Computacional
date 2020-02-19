@@ -1,10 +1,8 @@
 """
 Practica 2
-
 Teoria Computacional // 2CM2
 **** Chavarria Vazquez Luis Enrique 
 **** Machorro Vences Ricardo Alberto
-
 """
 
 #Declaracion de los imports
@@ -117,34 +115,32 @@ def randomLenguaje(numeroPalabras,longitudPalabras,alfabetoEnt):
         while(len(palabraPosible)< int(longitudPalabras)):
             palabraSeleccion=alfabetoEnt[random.randrange(0,len(alfabetoEnt))]
             palabraPosible=palabraPosible+palabraSeleccion
-        print(palabraPosible)
-        print(lenguajeSalida)
         lenguajeSalida.append(palabraPosible)
     return lenguajeSalida
 
 
-def elevaAlfabetoPotencia(alfabetoEntrada,exponente):
-    if exponente==0:
+def elevaLenguajePotencia(lenguajeEntrada,exponenteEntrada):
+    if exponenteEntrada==0:
         print("[ ]")
-    elif exponente <= 5 and exponente > 0 :
-        potenciaAlfabeto(exponente,alfabetoEntrada,"")
-    elif exponente >= -5 and exponente < 0:
-        alfabetoReverse=list(alfabetoEntrada[i] [::-1] for i in range(0,len(alfabetoEntrada)-1))
-        potenciaAlfabeto(exponente,alfabetoReverse,"")
+    elif exponenteEntrada <= 5 and exponenteEntrada > 0 :
+        potenciaLenguaje(exponenteEntrada,lenguajeEntrada,"")
+    elif exponenteEntrada >= -5 and exponenteEntrada < 0:
+        lenguajeReverse=list(lenguajeEntrada[i] [::-1] for i in range(0,len(lenguajeEntrada)))
+        potenciaLenguaje(exponenteEntrada*(-1),lenguajeReverse,"")
     else:
         print("Escriba un valor entre 5 y -5")
     
 
-def potenciaAlfabeto(numero,alfabetoEntrada,base):
+def potenciaLenguaje(numero,lenguajeEntrada,base):
     if numero == 0:
         print("")
         return
     if numero > 1:
-        for palabra in alfabetoEntrada:
-            potenciaAlfabeto((numero-1),alfabetoEntrada,base + str(palabra)) #n PARAMETRO QUE NOS AYUDA CON LOS CASOS BASE
+        for palabra in lenguajeEntrada:
+            potenciaLenguaje((numero-1),lenguajeEntrada,base + str(palabra)) #n PARAMETRO QUE NOS AYUDA CON LOS CASOS BASE
             # PALABRA CONCATENADA CON LA BASE PARA PODER QUE LOS GRUPOS TENGAN SENTIDO
     else:
-        for palabra in alfabetoEntrada:
+        for palabra in lenguajeEntrada:
             print(base + str(palabra), end = ",") #Para la parte de los espacio end no permite que haga salto de linea
 
 ##Union del lenguaje
@@ -257,7 +253,30 @@ while not salir:
                 print("La resta R2 del lenguaje es (L2-L1) == ")
                 print(restaLenguajesValue2)
             elif opcionOperaLenguajes==4:
-                pass
+                salidaMenuExpoLenguajes=0
+                while salidaMenuExpoLenguajes==0:
+                    print("Seleccione la opcion:")
+                    print("[1] Elevar el lenguaje 1")
+                    print("[2] Elevar el lenguaje 2")
+                    opcLenguajeElevadoExpo=pedirNumeroEntero()
+                    if opcLenguajeElevadoExpo==1:
+                        print("Escriba un exponente entre +5 y -5")
+                        opcLenguajeExpo=pedirNumeroEntero()
+                        if(opcLenguajeExpo <= 5 and opcLenguajeExpo>=-5):
+                            elevaLenguajePotencia(lenguaje1,opcLenguajeExpo)
+                            salidaMenuExpoLenguajes=1
+                        else:
+                            print("El exponente esta fuera de rango")
+                    elif opcLenguajeElevadoExpo==2:
+                        print("Escriba un exponente entre +5 y -5")
+                        opcLenguajeExpo=pedirNumeroEntero()
+                        if(opcLenguajeExpo <= 5 and opcLenguajeExpo>=-5):
+                           elevaLenguajePotencia(lenguaje2,opcLenguajeExpo)
+                           salidaMenuExpoLenguajes=1
+                        else:
+                            print("El exponente esta fuera de rango")
+                    else:
+                        print("Eliga una opccion mencionada")
             elif opcionOperaLenguajes==5:
                 pass
             elif opcionOperaLenguajes==6:
