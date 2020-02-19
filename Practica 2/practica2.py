@@ -110,12 +110,19 @@ def checarPosibAlfabeto(alfabetoEntr,longitudPalabrasEsperado):
 #Metodo generar lenguaje aleatorio
 def randomLenguaje(numeroPalabras,longitudPalabras,alfabetoEnt):
     lenguajeSalida=[]
+    NoRepeticion=1
     for i in range(0,int(numeroPalabras)):
         palabraPosible=""
         while(len(palabraPosible)< int(longitudPalabras)):
             palabraSeleccion=alfabetoEnt[random.randrange(0,len(alfabetoEnt))]
             palabraPosible=palabraPosible+palabraSeleccion
         lenguajeSalida.append(palabraPosible)
+        for i in range(0,len(lenguajeSalida)):
+            if lenguajeSalida.count(lenguajeSalida[i])>1:
+                NoRepeticion=0
+                break
+        if NoRepeticion==0:
+            lenguajeSalida=randomLenguaje(numeroPalabras,longitudPalabras,alfabetoEnt)
     return lenguajeSalida
 
 
