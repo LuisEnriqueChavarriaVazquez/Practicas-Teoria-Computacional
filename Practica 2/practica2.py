@@ -170,6 +170,80 @@ def restaLenguajes(lenguaje1,lenguaje2):
             resta.append(palabra)     
     return resta
 
+#Funcion generadora de CURP random
+def generadorCURPRandom():
+    CURPRandom=""
+    letrasMay=list(string.ascii_uppercase)
+    listaNombre=["RICARDO","ANDRES","ANTONIO","GERARDO","LEONARDO","NEYMAR","ANA","ENZO","ERICK","EVA","HUGO","ANGEL","DAVID","CARLOS","JOSE","ALEJANDRO","ALBERTO","ENRIQUE"]
+    listaApellidosPaternos=["BAPTISTA","AYALA","AVILA","ARRIETA","ARROYO","CALVA","CARRILLO","SANCHEZ","GONZALES","MORENO","PEREZ","SERRANO","CANO","MORCILLO","PARDO","TEBAR","GONZALES","SALINAS"]
+    listaApellidosMaternos=["HERNANDEZ","VARELA","ROSAS","VIVEROS","CASTELLANOS","LAGUILLO","CASADO","VELASCO","RAMOS","BARRETO","QUIROZ","AMARO","BLOCK","CORNEJO","CASTRO","PANDO","MEDINA"]
+    listaVocales=["A","E","I","O","U"]
+    EntidadNacimiento=["AS","BS","CL","CS","DF","GT","HG","MC","MS","NL","PL","QR","SL","TC","TL","YN","NE","BC","CC","CM","CH","DG","GR","JC","MN","NT","OC","QT","SP","SR","TS","VZ","ZS"]
+    NombreRandom=listaNombre[random.randrange(0,len(listaNombre))]
+    ApePaternoRandom=listaApellidosPaternos[random.randrange(0,len(listaApellidosPaternos))]
+    ApeMaternoRandom=listaApellidosMaternos[random.randrange(0,len(listaApellidosMaternos))]
+    CURPRandom+=ApePaternoRandom[0]
+    for i in range(0,len(ApePaternoRandom)):
+        if ApePaternoRandom[i] in listaVocales:
+            CURPRandom+=ApePaternoRandom[i]
+            break
+    CURPRandom+=ApeMaternoRandom[0]
+    CURPRandom+=NombreRandom[0]
+    YearRandom1=str(random.randrange(0,10))
+    YearRandom2=str(random.randrange(0,10))
+    CURPRandom+=YearRandom1
+    CURPRandom+=YearRandom2
+    MesRandom1=""
+    MesRandom2=""
+    DiaRandom1=""
+    DiaRandom2=""
+    MesRandom1=random.randrange(0,2)
+    if MesRandom1==0:
+        MesRandom2=random.randrange(1,10)
+    elif MesRandom1==1:
+        MesRandom2=random.randrange(0,3)
+    if MesRandom1==0 and MesRandom2==2:
+        DiaRandom1=random.randrange(0,3)
+        DiaRandom2=random.randrange(1,10)
+    else:
+        DiaRandom1=random.randrange(0,4)
+        if DiaRandom1==3:
+            DiaRandom2=random.randrange(0,2)
+        else:
+            DiaRandom2=random.randrange(1,10)
+    CURPRandom+=str(MesRandom1)
+    CURPRandom+=str(MesRandom2)
+    CURPRandom+=str(DiaRandom1)
+    CURPRandom+=str(DiaRandom2)
+    SexoRandom=random.randrange(1,3)
+    if SexoRandom==1:
+        CURPRandom+="H"
+    elif SexoRandom==2:
+        CURPRandom+="M"
+    CURPRandom+=EntidadNacimiento[random.randrange(0,len(EntidadNacimiento))]
+    for i in range(0,len(ApePaternoRandom)):
+        if ApePaternoRandom[i] not in listaVocales:
+            CURPRandom+=ApePaternoRandom[i]
+            break
+    for i in range(0,len(ApeMaternoRandom)):
+        if ApeMaternoRandom[i] not in listaVocales:
+            CURPRandom+=ApeMaternoRandom[i]
+            break
+    for i in range(0,len(NombreRandom)):
+        if NombreRandom[i] not in listaVocales:
+            CURPRandom+=NombreRandom[i]
+            break
+    decisionLetraNumero=random.randrange(1,3)
+    PrimeroHomoclave=""
+    if decisionLetraNumero==1:
+        PrimeroHomoclave=random.randrange(0,10)
+    elif decisionLetraNumero==2:
+        PrimeroHomoclave=letrasMay[random.randrange(0,len(letrasMay))]  
+    SegundoHomoclave=random.randrange(0,10)
+    CURPRandom+=str(PrimeroHomoclave)
+    CURPRandom+=str(SegundoHomoclave)
+    return CURPRandom
+
 #Ciclo para el menu
 salir = False
 opcionMenuPrincipal = 0
@@ -285,7 +359,7 @@ while not salir:
                     else:
                         print("Eliga una opccion mencionada")
             elif opcionOperaLenguajes==5:
-                pass
+                print("El CURP random es:",generadorCURPRandom())
             elif opcionOperaLenguajes==6:
                 pass
             elif opcionOperaLenguajes==7:
