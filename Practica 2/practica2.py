@@ -10,7 +10,6 @@ Teoria Computacional // 2CM2
 import string
 import sys
 import random
-import re
 
 #Listas referencias
 letrasMay=list(string.ascii_uppercase)  #Estamos guardando todo el conjunto de elementos en uppercase
@@ -23,10 +22,6 @@ alfabetoRef = [""]
 #Lenguajes vacios
 lenguaje1=[""]
 lenguaje2=[""]
-
-#Espacio para las expresiones regulares.
-alphabetRepeated = '^((((([b-df-hj-np-tv-z]*)(a+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(e+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(i+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(o+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(u+)([b-df-hj-np-tv-z]*))+)))+$'
-
 #Linea para interfaz de consola 
 #Esta parte solamente es estetica y con fines de ahorrar codigo
 
@@ -118,9 +113,11 @@ def randomLenguaje(numeroPalabras,longitudPalabras,alfabetoEnt):
     NoRepeticion=1
     for i in range(0,int(numeroPalabras)):
         palabraPosible=""
-        while(len(palabraPosible)< int(longitudPalabras)):
+        j=0
+        while(j< int(longitudPalabras)):
+            j+=1
             palabraSeleccion=alfabetoEnt[random.randrange(0,len(alfabetoEnt))]
-            palabraPosible=palabraPosible+palabraSeleccion
+            palabraPosible=palabraPosible+palabraSeleccion 
         lenguajeSalida.append(palabraPosible)
         for i in range(0,len(lenguajeSalida)):
             if lenguajeSalida.count(lenguajeSalida[i])>1:
@@ -249,13 +246,6 @@ def generadorCURPRandom():
     CURPRandom+=str(SegundoHomoclave)
     return CURPRandom
 
-#Funcion para el alfabeto con elementos repetidos
-def checkTextoConVocalesRepetidas(textoVocales):
-    if(re.match(alphabetRepeated,textoVocales)):
-        print("\n## texto Valido")
-    else:
-        print("\n## texto No valido")
-
 #Ciclo para el menu
 salir = False
 opcionMenuPrincipal = 0
@@ -373,8 +363,7 @@ while not salir:
             elif opcionOperaLenguajes==5:
                 print("El CURP random es:",generadorCURPRandom())
             elif opcionOperaLenguajes==6:
-                textoVocales = str(input("Ingrese el texto que desea validar == "))
-                checkTextoConVocalesRepetidas(textoVocales)
+                pass
             elif opcionOperaLenguajes==7:
                 salidaMenuOperaLenguajes=1
     elif opcionMenuPrincipal == 4:
