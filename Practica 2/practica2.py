@@ -25,7 +25,7 @@ lenguaje1=[""]
 lenguaje2=[""]
 
 #Espacio para las expresiones regulares.
-alphabetRepeated = '^(((([b-df-hj-np-tv-z]*)(a+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(e+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(i+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(o+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(u+)([b-df-hj-np-tv-z]*))+))$'
+alphabetRepeated = '^((((([b-df-hj-np-tv-z]*)(a+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(e+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(i+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(o+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(u+)([b-df-hj-np-tv-z]*))+)))+$'
 
 #Linea para interfaz de consola 
 #Esta parte solamente es estetica y con fines de ahorrar codigo
