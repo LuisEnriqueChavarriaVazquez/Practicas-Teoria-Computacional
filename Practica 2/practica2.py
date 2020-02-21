@@ -11,6 +11,8 @@ import string
 import sys
 import random
 
+sys.setrecursionlimit(80000)
+
 #Listas referencias
 letrasMay=list(string.ascii_uppercase)  #Estamos guardando todo el conjunto de elementos en uppercase
 letrasMin=list(string.ascii_lowercase) #estamos guardando todo el conjunto de elemento en lower
@@ -110,21 +112,21 @@ def checarPosibAlfabeto(alfabetoEntr,longitudPalabrasEsperado):
 #Metodo generar lenguaje aleatorio
 def randomLenguaje(numeroPalabras,longitudPalabras,alfabetoEnt):
     lenguajeSalida=[]
-    NoRepeticion=1
     for i in range(0,int(numeroPalabras)):
-        palabraPosible=""
-        j=0
-        while(j< int(longitudPalabras)):
-            j+=1
-            palabraSeleccion=alfabetoEnt[random.randrange(0,len(alfabetoEnt))]
-            palabraPosible=palabraPosible+palabraSeleccion 
+        SalidaRepeticion=0
+        #j=0
+        while (SalidaRepeticion==0):
+            j=0
+            palabraPosible=""
+            while(j< int(longitudPalabras)):
+                j+=1
+                palabraSeleccion=alfabetoEnt[random.randrange(0,len(alfabetoEnt))]
+                palabraPosible=palabraPosible+palabraSeleccion
+            if palabraPosible not in lenguajeSalida:
+                SalidaRepeticion=1
+            else:
+                SalidaRepeticion=0     
         lenguajeSalida.append(palabraPosible)
-        for i in range(0,len(lenguajeSalida)):
-            if lenguajeSalida.count(lenguajeSalida[i])>1:
-                NoRepeticion=0
-                break
-        if NoRepeticion==0:
-            lenguajeSalida=randomLenguaje(numeroPalabras,longitudPalabras,alfabetoEnt)
     return lenguajeSalida
 
 
