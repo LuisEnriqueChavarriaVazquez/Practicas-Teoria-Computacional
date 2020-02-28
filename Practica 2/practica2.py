@@ -10,6 +10,7 @@ Teoria Computacional // 2CM2
 import string
 import sys
 import random
+import re
 
 sys.setrecursionlimit(80000)
 
@@ -20,6 +21,9 @@ numerosList=list(str(i) for i in range(0,10) )
 
 #Inicializando listas vacias
 alfabetoRef = [""]
+
+#expresion regular
+alphabetRepeated = '^((((([b-df-hj-np-tv-z]*)(a+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(e+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(i+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(o+)([b-df-hj-np-tv-z]*))+)((([b-df-hj-np-tv-z]*)(u+)([b-df-hj-np-tv-z]*))+)))+$'
 
 #Lenguajes vacios
 lenguaje1=[""]
@@ -173,6 +177,13 @@ def restaLenguajes(lenguaje1,lenguaje2):
         if palabra not in lenguaje2:
             resta.append(palabra)     
     return resta
+
+    #Funcion para el alfabeto con elementos repetidos
+def checkTextoConVocalesRepetidas(textoVocales):
+    if(re.match(alphabetRepeated,textoVocales)):
+        print("\n## texto Valido")
+    else:
+        print("\n## texto No valido")
 
 #Funcion generadora de CURP random
 def generadorCURPRandom():
@@ -365,7 +376,8 @@ while not salir:
             elif opcionOperaLenguajes==5:
                 print("El CURP random es:",generadorCURPRandom())
             elif opcionOperaLenguajes==6:
-                pass
+                p textoVocales = str(input("Ingrese el texto que desea validar == "))
+                checkTextoConVocalesRepetidas(textoVocales)
             elif opcionOperaLenguajes==7:
                 salidaMenuOperaLenguajes=1
     elif opcionMenuPrincipal == 4:
