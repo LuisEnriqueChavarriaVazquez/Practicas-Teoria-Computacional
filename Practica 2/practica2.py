@@ -376,7 +376,7 @@ while not salir:
             elif opcionOperaLenguajes==5:
                 print("El CURP random es:",generadorCURPRandom())
             elif opcionOperaLenguajes==6:
-                p textoVocales = str(input("Ingrese el texto que desea validar == "))
+                textoVocales = str(input("Ingrese el texto que desea validar == "))
                 checkTextoConVocalesRepetidas(textoVocales)
             elif opcionOperaLenguajes==7:
                 salidaMenuOperaLenguajes=1
