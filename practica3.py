@@ -82,6 +82,41 @@ def evaluarNumero(cadenaEntrada):
      else:
          print("Cadena rechazada")
 
+def evaluarCadenaABC(cadenaEntrada):
+    coleccionABC=['a','b','c']
+    if len(cadenaEntrada)==3:
+        if cadenaEntrada[0]=='a':
+            if cadenaEntrada[1]=='a' and cadenaEntrada[2] in coleccionABC:
+                print("Cadena aceptada")
+            elif cadenaEntrada[1]=='b' and cadenaEntrada[2]=='b':
+                print("Cadena aceptada")
+            elif cadenaEntrada[1]=='c' and cadenaEntrada[2]=='c':
+                print("Cadena aceptada")
+            else:
+                print("Cadena rechazada")
+        elif cadenaEntrada[0]=='b':
+            if cadenaEntrada[1]=='b' and cadenaEntrada[2] in coleccionABC:
+                print("Cadena aceptada")
+            elif cadenaEntrada[1]=='a' and cadenaEntrada[2]=='a':
+                print("Cadena aceptada")
+            elif cadenaEntrada[1]=='c' and cadenaEntrada[2]=='c':
+                print("Cadena aceptada")
+            else:
+                print("Cadena rechazada")
+        elif cadenaEntrada[0]=='c':
+            if cadenaEntrada[1]=='c' and cadenaEntrada[2] in coleccionABC:
+                print("Cadena aceptada")
+            elif cadenaEntrada[1]=='a' and cadenaEntrada[2]=='a':
+                print("Cadena aceptada")
+            elif cadenaEntrada[1]=='b' and cadenaEntrada[2]=='b':
+                print("Cadena aceptada")
+            else:
+                print("Cadena rechazada")
+        else:
+            print("Cadena rechazada")
+    else:
+        print("Cadena rechazada")
+    
 
 
 
@@ -92,12 +127,14 @@ while not salir:
     print(f"""
      {linea} Menu principal:
      [1] Escriba un numero en notacion exponencial 
+     [2]
+     [3] escriba una cadena de longitud con el lenguaje compuesto por a,b,c que teng aun dos o mas palabras consecutivas
      """)
     print("Seleccione una opccion")
     opcionMenuPrincipal = pedirNumeroEntero()
     if opcionMenuPrincipal==1:
         cadenaEntrada=input("Numero entrada:")
         evaluarNumero(cadenaEntrada)
-       
-
-
+    elif opcionMenuPrincipal==3:
+        cadenaEntrada=input("Cadena entrada:")
+        evaluarCadenaABC(cadenaEntrada)
