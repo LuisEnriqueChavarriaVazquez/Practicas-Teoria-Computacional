@@ -2,9 +2,16 @@ import string
 import sys
 import random
 
+##Definiciones propias
+from stateDefinition import stateItself
+from stateDefinition import automataDefinition
+
 linea = "\u25A0"
 linea *= 5
+lineaBigger = linea
+lineaBigger *= 15
 listaNumeros=["0","1","2","3","4","5","6","7","8","9"]
+lenguajeIncisoDos = []
 def pedirNumeroEntero():
  
     correcto=False
@@ -18,6 +25,8 @@ def pedirNumeroEntero():
      
     return num
 
+
+### Evaluacion de la cadena de numeros
 def evaluarNumero(cadenaEntrada):
      Puntero=0
      existeE=0
@@ -82,6 +91,8 @@ def evaluarNumero(cadenaEntrada):
      else:
          print("Cadena rechazada")
 
+
+### Evaluacion de la cadena de letra
 def evaluarCadenaABC(cadenaEntrada):
     coleccionABC=['a','b','c']
     if len(cadenaEntrada)==3:
@@ -116,8 +127,47 @@ def evaluarCadenaABC(cadenaEntrada):
             print("Cadena rechazada")
     else:
         print("Cadena rechazada")
-    
 
+### Evaluacion de la cadena binaria
+def evaluarBinario(lenguajeIncisoDos,secondAutomataDefined):
+    contadorAutomataStatePosition = 0
+
+    while contadorAutomataStatePosition < len(lenguajeIncisoDos):
+        for character in lenguajeIncisoDos[contadorAutomataStatePosition]:
+            secondAutomataDefined.transicion(int(character))
+        contadorAutomataStatePosition += 1
+
+        if secondAutomataDefined.estadoNombre in lstAceptados:
+            print("Cadena valida")
+        else:
+            print("Tu cadena es invalida")
+            secondAutomataDefined=automataDefinition(secondAutomataListOfStates)
+
+    
+## Definiciones de estados del Segundo AUTOMATA
+stateItself0=stateItself([[0,"ESTADO_1"],[1,"ESTADO_3"]],"ESTADO_0")
+stateItself1=stateItself([[0,"ESTADO_2"],[1,"ESTADO_4"]],"ESTADO_1")
+stateItself2=stateItself([[0,"ESTADO_1"],[1,"ESTADO_6"]],"ESTADO_2")
+stateItself3=stateItself([[0,"ESTADO_1"],[1,"ESTADO_5"]],"ESTADO_3")
+stateItself4=stateItself([[0,"ESTADO_2"],[1,"ESTADO_5"]],"ESTADO_4")
+stateItself5=stateItself([[0,"ESTADO_5"],[1,"ESTADO_5"]],"ESTADO_5")
+stateItself6=stateItself([[0,"ESTADO_1"],[1,"ESTADO_5"]],"ESTADO_6")
+
+secondAutomataListOfStates=[]
+secondAutomataListOfStates.append(stateItself0)
+secondAutomataListOfStates.append(stateItself1)
+secondAutomataListOfStates.append(stateItself2)
+secondAutomataListOfStates.append(stateItself3)
+secondAutomataListOfStates.append(stateItself4)
+secondAutomataListOfStates.append(stateItself5)
+secondAutomataListOfStates.append(stateItself6)
+
+
+secondAutomataDefined=automataDefinition(secondAutomataListOfStates)
+lstAceptados=[]
+
+lstAceptados.append("ESTADO_2")
+lstAceptados.append("ESTADO_6")
 
 
 #Ciclo para el menu
@@ -127,14 +177,33 @@ while not salir:
     print(f"""
      {linea} Menu principal:
      [1] Escriba un numero en notacion exponencial 
-     [2]
-     [3] escriba una cadena de longitud con el lenguaje compuesto por a,b,c que teng aun dos o mas palabras consecutivas
+     [2] Escriba un lenguaje formada por cadenas que contengan un número par de símbolos 0, y sin símbolos 1 sucesivos para validar el correcto.
+     [3] Escriba una cadena de longitud con el lenguaje compuesto por a,b,c que teng aun dos o mas palabras consecutivas
+     [4] Escriba alguna de las aplicaciones del articulo Applications of Deterministic Finite Automata
+     {lineaBigger }
+     {linea + linea}[5] Imprimir el lenguaje del inciso 2
+     {linea + linea}[6] Limpiar el lenguaje del inciso 2
      """)
-    print("Seleccione una opccion")
+    print("Seleccione una opcion")
     opcionMenuPrincipal = pedirNumeroEntero()
+    contador = 0
     if opcionMenuPrincipal==1:
         cadenaEntrada=input("Numero entrada:")
         evaluarNumero(cadenaEntrada)
+    elif opcionMenuPrincipal == 2:
+        longitud = int(input("Defina la longitud del lenguaje =="))
+        longitud -= 1
+        while contador <= longitud:
+            cadenaEntrada = input("""Dame una cadena con las siguientes caracteristicas: Número par de símbolos 0, y sin símbolos 1 sucesivos.
+                                    ////CADENA ==""")
+            lenguajeIncisoDos.append(cadenaEntrada)
+            evaluarBinario(lenguajeIncisoDos,secondAutomataDefined)
+            contador += 1
     elif opcionMenuPrincipal==3:
         cadenaEntrada=input("Cadena entrada:")
         evaluarCadenaABC(cadenaEntrada)
+    elif opcionMenuPrincipal == 5:
+        print("El lenguaje validado es == ")
+        print(lenguajeIncisoDos)
+    elif opcionMenuPrincipal == 6:
+        lenguajeIncisoDos = []

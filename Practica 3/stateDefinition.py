@@ -1,11 +1,11 @@
-class estado:
+class stateItself:
 
     def __init__(self, listado, nombre):
         self.listado = listado
         self.nombre = nombre
 
 
-class automata:
+class automataDefinition:
 
     def __init__(self, estados):
         self.estadoNombre = estados[0].nombre
