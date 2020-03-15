@@ -203,7 +203,7 @@ while not salir:
         cadenaEntrada=input("Cadena entrada:")
         evaluarCadenaABC(cadenaEntrada)
     elif opcionMenuPrincipal == 5:
-        print("El lenguaje validado es == ")
+        print("El lenguaje ingresado es == ")
         print(lenguajeIncisoDos)
     elif opcionMenuPrincipal == 6:
         lenguajeIncisoDos = []
