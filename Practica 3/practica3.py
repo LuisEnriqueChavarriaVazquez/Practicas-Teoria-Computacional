@@ -206,16 +206,63 @@ lstAceptados_vending.append("ESTADO_vending_6")
 lstAceptados_vending.append("ESTADO_vending_7")
 lstAceptados_vending.append("ESTADO_vending_9")"""
 
-
-def maquinaVending(cadenaEntrada):
-    if cadenaEntrada == .25:
-        faltante = float(input("Le falta un dolar, ingreselo por favor = "))
-        if faltante == 1.0:
-            cadenaEntrada == faltante + .25
-            if cadenaEntrada == 1.25:
+##Validacion de los casos de la maquina de VENDING
+def maquinaVending(acumulado):
+    if acumulado == .25:
+        faltante = float(input("Le falta un dolar para acompletar 1.25, ingreselo por favor = "))
+        if faltante == 1.0: ##usuario nos da un dolar
+            acumulado = faltante + acumulado
+            if acumulado == 1.25:
                 print("Tome su soda!!!")
+        elif faltante == .25: ##usuario nos da un .25
+            acumulado = faltante + .25
+            if acumulado == .50:
+                faltante = float(input("Le falta .75 para acompletar 1.25, ingreselo por favor = "))
+                if faltante == .25:
+                    acumulado = faltante + .50
+                    faltante = float(input("Le falta .50 para acompletar 1.25, ingreselo por favor = "))
+                    if faltante == .25:
+                        acumulado = faltante + .75
+                        faltante = float(input("Le falta .25 para acompletar 1.25, ingreselo por favor = "))
+                        if  faltante == .25:
+                            acumulado = faltante + 1.0
+                            if acumulado == 1.25:
+                                print("Tome su soda!!!")
+                        elif faltante == 1.0:
+                            acumulado = faltante + 1.0
+                            if acumulado == 2.0:
+                                print("Tome su soda y su cambio!!!")
+                        else:
+                            print("No aceptamos esa denominacion!!! Solo .25 y 1 Dolar")
+                    elif faltante == 1.0:
+                        acumulado = faltante + .50
+                        if acumulado == 1.5:
+                            print("Tome su soda y su cambio!!!")
+                    else:
+                        print("No aceptamos esa denominacion!!! Solo .25 y 1 Dolar")
+                elif faltante == 1.0:
+                    print("Tome su soda y su cambio!!")
+                else:
+                    print("No aceptamos esa denominacion!!! Solo .25 y 1 Dolar")
+            else:
+                print("No aceptamos esa denominacion!!! Solo .25 y 1 Dolar")
+    elif acumulado == 1.0:
+        faltante = float(input("Le falta .25 centavos para acompletar 1.25 , ingreselo por favor = "))
+        if faltante == .25:
+            print("Tome su soda!!!")
+        elif faltante == 1.0:
+            print("Tome su soda y su cambio!!")
         else:
-            pass
+            print("No aceptamos esa denominacion!!! Solo .25 y 1 Dolar")
+    else:
+        print("No aceptamos esa denominacion!!! Solo .25 y 1 Dolar")
+
+##Validamos lo que la maquina recibe
+def validarDolares(cadenaEntrada):
+    if cadenaEntrada == 1.0 or cadenaEntrada == .25:
+        return True
+    else:
+        return False
 
 
 ### Parte del semaforo
@@ -297,10 +344,17 @@ while not salir:
     elif opcionMenuPrincipal == 4:
         ejecutarSemaforo()
     elif opcionMenuPrincipal == 5:
+        ##Validacion de la maquina de vending
         print(f"""Bienvenido a la maquina de Vending de SODAS
+                /////// SOLO ACEPTAMOS 1 DOLAR Y .25 CENTAVOS
                 {linea} Precio de las sodas: 1.25 """)
         cadenaEntrada = float(input("Ingrese una cantidad de dinero = "))
-        maquinaVending(cadenaEntrada)
+        validacion = validarDolares(cadenaEntrada)
+        if validacion == True:
+            print(f"""{linea} Cantidad aceptada """)
+            maquinaVending(cadenaEntrada)
+        else:
+            print("Valor no adecuado, la maquina no acepta dichas cantidades")
     elif opcionMenuPrincipal == 6:
         print("El lenguaje ingresado es == ")
         print(lenguajeIncisoDos)
