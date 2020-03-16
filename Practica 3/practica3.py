@@ -9,10 +9,6 @@ import time
 from stateDefinition import stateItself
 from stateDefinition import automataDefinition
 
-##Libreria para la maquina de VENDING
-from fysom import Fysom
-
-
 linea = "\u25A0"
 linea *= 5
 lineaBigger = linea
