@@ -178,7 +178,7 @@ lstAceptados.append("ESTADO_6")
 
 ### PARTE DE LA MAQUINA DE VENDING
 
-stateItself0_2=stateItself([[0,"ESTADO_vending_1"],[1,"ESTADO_vending_2"]],"ESTADO_vending_0")
+"""stateItself0_2=stateItself([[0,"ESTADO_vending_1"],[1,"ESTADO_vending_2"]],"ESTADO_vending_0")
 stateItself1_2=stateItself([[0,"ESTADO_vending_2"],[1,"ESTADO_vending_3"]],"ESTADO_vending_1")
 stateItself2_2=stateItself([[0,"ESTADO_vending_3"],[1,"ESTADO_vending_4"]],"ESTADO_vending_2")
 stateItself3_2=stateItself([[0,"ESTADO_vending_4"],[1,"ESTADO_vending_5"]],"ESTADO_vending_3")
@@ -204,21 +204,18 @@ lstAceptados_vending=[]
 lstAceptados_vending.append("ESTADO_vending_5")
 lstAceptados_vending.append("ESTADO_vending_6")
 lstAceptados_vending.append("ESTADO_vending_7")
-lstAceptados_vending.append("ESTADO_vending_9")
+lstAceptados_vending.append("ESTADO_vending_9")"""
 
 
-def maquinaVending(cadenaEntrada,vending_AutomataDefined):
-
-    while 1 == 1:
-        for character in cadenaEntrada:
-            vending_AutomataDefined.transicion(character)
-
-        if vending_AutomataDefined.estadoNombre in lstAceptados:
-            print("Cadena valida")
-            break
+def maquinaVending(cadenaEntrada):
+    if cadenaEntrada == .25:
+        faltante = float(input("Le falta un dolar, ingreselo por favor = "))
+        if faltante == 1.0:
+            cadenaEntrada == faltante + .25
+            if cadenaEntrada == 1.25:
+                print("Tome su soda!!!")
         else:
-            print("Tu cadena es invalida")
-            vending_AutomataDefined=automataDefinition(vending_AutomataListOfStates)
+            pass
 
 
 ### Parte del semaforo
@@ -226,28 +223,13 @@ def ejecutarSemaforo():
     ###Automata for stop light in python
     wn = turtle.Screen()
     wn.title("Luces de semaforo automata")
-    wn.bgcolor("black")
-
-    ###Diseño
-    dibujo = turtle.Turtle()
-    dibujo.color("blue")
-    dibujo.width(10)
-    dibujo.hideturtle()
-    dibujo.penup()
-    dibujo.goto(-30,60)
-    dibujo.pendown()
-    dibujo.fd(60)
-    dibujo.rt(90)
-    dibujo.fd(120)
-    dibujo.rt(90)
-    dibujo.fd(60)
-    dibujo.rt(90)
-    dibujo.fd(120)
+    wn.bgcolor("blue")
 
     ### Diseño de las luces ((Creacion de elementos))
     luzRoja = turtle.Turtle()
     luzRoja.shape("circle")
     luzRoja.color("grey")
+    luzRoja.pensize(10)
     luzRoja.penup()
     luzRoja.goto(0,40)
 
@@ -317,8 +299,8 @@ while not salir:
     elif opcionMenuPrincipal == 5:
         print(f"""Bienvenido a la maquina de Vending de SODAS
                 {linea} Precio de las sodas: 1.25 """)
-        cadenaEntrada = input("Ingrese una cantidad de dinero = ")
-        maquinaVending(cadenaEntrada,vending_AutomataDefined)
+        cadenaEntrada = float(input("Ingrese una cantidad de dinero = "))
+        maquinaVending(cadenaEntrada)
     elif opcionMenuPrincipal == 6:
         print("El lenguaje ingresado es == ")
         print(lenguajeIncisoDos)
