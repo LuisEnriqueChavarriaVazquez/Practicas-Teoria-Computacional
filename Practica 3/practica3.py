@@ -9,6 +9,10 @@ import time
 from stateDefinition import stateItself
 from stateDefinition import automataDefinition
 
+##Libreria para la maquina de VENDING
+from fysom import Fysom
+
+
 linea = "\u25A0"
 linea *= 5
 lineaBigger = linea
@@ -172,6 +176,52 @@ lstAceptados=[]
 lstAceptados.append("ESTADO_2")
 lstAceptados.append("ESTADO_6")
 
+### PARTE DE LA MAQUINA DE VENDING
+
+stateItself0_2=stateItself([[0,"ESTADO_vending_1"],[1,"ESTADO_vending_2"]],"ESTADO_vending_0")
+stateItself1_2=stateItself([[0,"ESTADO_vending_2"],[1,"ESTADO_vending_3"]],"ESTADO_vending_1")
+stateItself2_2=stateItself([[0,"ESTADO_vending_3"],[1,"ESTADO_vending_4"]],"ESTADO_vending_2")
+stateItself3_2=stateItself([[0,"ESTADO_vending_4"],[1,"ESTADO_vending_5"]],"ESTADO_vending_3")
+stateItself4_2=stateItself([[0,"ESTADO_vending_3"],[1,"ESTADO_vending_6"]],"ESTADO_vending_4") ##Final
+stateItself5_2=stateItself([[0,"ESTADO_vending_2"],[1,"ESTADO_vending_7"]],"ESTADO_vending_5") ##Final
+stateItself6_2=stateItself([[0,"ESTADO_vending_1"],[1,"ESTADO_vending_8"]],"ESTADO_vending_6") ##Final
+stateItself6_2=stateItself([[0,"ESTADO_vending_8"],[1,"ESTADO_vending_9"]],"ESTADO_vending_6") ##Final
+stateItself6_2=stateItself([[0,"ESTADO_vending_8"],[1,"ESTADO_vending_7"]],"ESTADO_vending_6") ##Final
+
+vending_AutomataListOfStates=[]
+vending_AutomataListOfStates.append(stateItself0)
+vending_AutomataListOfStates.append(stateItself1)
+vending_AutomataListOfStates.append(stateItself2)
+vending_AutomataListOfStates.append(stateItself3)
+vending_AutomataListOfStates.append(stateItself4)
+vending_AutomataListOfStates.append(stateItself5)
+vending_AutomataListOfStates.append(stateItself6)
+
+
+vending_AutomataDefined=automataDefinition(vending_AutomataListOfStates)
+lstAceptados_vending=[]
+
+lstAceptados_vending.append("ESTADO_vending_5")
+lstAceptados_vending.append("ESTADO_vending_6")
+lstAceptados_vending.append("ESTADO_vending_7")
+lstAceptados_vending.append("ESTADO_vending_9")
+
+
+def maquinaVending(cadenaEntrada,vending_AutomataDefined):
+
+    while 1 == 1:
+        for character in cadenaEntrada:
+            vending_AutomataDefined.transicion(character)
+
+        if vending_AutomataDefined.estadoNombre in lstAceptados:
+            print("Cadena valida")
+            break
+        else:
+            print("Tu cadena es invalida")
+            vending_AutomataDefined=automataDefinition(vending_AutomataListOfStates)
+
+
+### Parte del semaforo
 def ejecutarSemaforo():
     ###Automata for stop light in python
     wn = turtle.Screen()
@@ -251,11 +301,11 @@ while not salir:
         cadenaEntrada=input("Numero entrada:")
         evaluarNumero(cadenaEntrada)
     elif opcionMenuPrincipal == 2:
-        longitud = int(input("Defina la longitud del lenguaje =="))
+        longitud = int(input("Defina la longitud del lenguaje == "))
         longitud -= 1
         while contador <= longitud:
             cadenaEntrada = input("""Dame una cadena con las siguientes caracteristicas: Número par de símbolos 0, y sin símbolos 1 sucesivos.
-                                    ////CADENA ==""")
+                                    ////CADENA == """)
             lenguajeIncisoDos.append(cadenaEntrada)
             evaluarBinario(lenguajeIncisoDos,secondAutomataDefined)
             contador += 1   
@@ -264,6 +314,11 @@ while not salir:
         evaluarCadenaABC(cadenaEntrada)
     elif opcionMenuPrincipal == 4:
         ejecutarSemaforo()
+    elif opcionMenuPrincipal == 5:
+        print(f"""Bienvenido a la maquina de Vending de SODAS
+                {linea} Precio de las sodas: 1.25 """)
+        cadenaEntrada = input("Ingrese una cantidad de dinero = ")
+        maquinaVending(cadenaEntrada,vending_AutomataDefined)
     elif opcionMenuPrincipal == 6:
         print("El lenguaje ingresado es == ")
         print(lenguajeIncisoDos)
