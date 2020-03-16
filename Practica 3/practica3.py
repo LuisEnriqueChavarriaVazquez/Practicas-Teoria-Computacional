@@ -2,6 +2,9 @@ import string
 import sys
 import random
 
+import turtle
+import time
+
 ##Definiciones propias
 from stateDefinition import stateItself
 from stateDefinition import automataDefinition
@@ -169,6 +172,62 @@ lstAceptados=[]
 lstAceptados.append("ESTADO_2")
 lstAceptados.append("ESTADO_6")
 
+def ejecutarSemaforo():
+    ###Automata for stop light in python
+    wn = turtle.Screen()
+    wn.title("Luces de semaforo automata")
+    wn.bgcolor("black")
+
+    ###Diseño
+    dibujo = turtle.Turtle()
+    dibujo.color("blue")
+    dibujo.width(10)
+    dibujo.hideturtle()
+    dibujo.penup()
+    dibujo.goto(-30,60)
+    dibujo.pendown()
+    dibujo.fd(60)
+    dibujo.rt(90)
+    dibujo.fd(120)
+    dibujo.rt(90)
+    dibujo.fd(60)
+    dibujo.rt(90)
+    dibujo.fd(120)
+
+    ### Diseño de las luces ((Creacion de elementos))
+    luzRoja = turtle.Turtle()
+    luzRoja.shape("circle")
+    luzRoja.color("grey")
+    luzRoja.penup()
+    luzRoja.goto(0,40)
+
+    luzAmarilla = turtle.Turtle()
+    luzAmarilla.shape("circle")
+    luzAmarilla.color("grey")
+    luzAmarilla.penup()
+    luzAmarilla.goto(0,0)
+
+    luzVerde = turtle.Turtle()
+    luzVerde.shape("circle")
+    luzVerde.color("grey")
+    luzVerde.penup()
+    luzVerde.goto(0,-40)
+
+    ### Establecer el cambio
+
+    while True:
+        luzAmarilla.color("grey")
+        luzRoja.color("red")
+        time.sleep(4)
+        luzRoja.color("grey")
+        luzVerde.color("green")
+        time.sleep(3)
+        luzVerde.color("grey")
+        luzAmarilla.color("yellow")
+        time.sleep(2)
+    ### pausar la pantalla
+    wn.mainloop()
+
 
 #Ciclo para el menu
 salir = False
@@ -179,10 +238,11 @@ while not salir:
      [1] Escriba un numero en notacion exponencial 
      [2] Escriba un lenguaje formada por cadenas que contengan un número par de símbolos 0, y sin símbolos 1 sucesivos para validar el correcto.
      [3] Escriba una cadena de longitud con el lenguaje compuesto por a,b,c que teng aun dos o mas palabras consecutivas
-     [4] Escriba alguna de las aplicaciones del articulo Applications of Deterministic Finite Automata
+     [4] Semaforo
+     [5] Maquina de VENDING
      {lineaBigger }
-     {linea + linea}[5] Imprimir el lenguaje del inciso 2
-     {linea + linea}[6] Limpiar el lenguaje del inciso 2
+     {linea + linea}[6] Imprimir el lenguaje del inciso 2
+     {linea + linea}[7] Limpiar el lenguaje del inciso 2
      """)
     print("Seleccione una opcion")
     opcionMenuPrincipal = pedirNumeroEntero()
@@ -198,14 +258,14 @@ while not salir:
                                     ////CADENA ==""")
             lenguajeIncisoDos.append(cadenaEntrada)
             evaluarBinario(lenguajeIncisoDos,secondAutomataDefined)
-            contador += 1
-    elif opcionMenuPrincipal == 4:
-        
+            contador += 1   
     elif opcionMenuPrincipal==3:
         cadenaEntrada=input("Cadena entrada:")
         evaluarCadenaABC(cadenaEntrada)
-    elif opcionMenuPrincipal == 5:
+    elif opcionMenuPrincipal == 4:
+        ejecutarSemaforo()
+    elif opcionMenuPrincipal == 6:
         print("El lenguaje ingresado es == ")
         print(lenguajeIncisoDos)
-    elif opcionMenuPrincipal == 6:
+    elif opcionMenuPrincipal == 7:
         lenguajeIncisoDos = []
