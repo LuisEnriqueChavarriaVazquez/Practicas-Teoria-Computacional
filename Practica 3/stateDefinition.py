@@ -14,9 +14,9 @@ class automataDefinition:
 
     def transicion(self, numero):
         estadoActual = None
-        for x in range(0,len(self.lstEstados)):
-            if self.lstEstados[x].nombre == self.estadoNombre:
-                estadoActual = self.lstEstados[x]
+        for stateChangeIndex in range(0,len(self.lstEstados)):
+            if self.lstEstados[stateChangeIndex].nombre == self.estadoNombre:
+                estadoActual = self.lstEstados[stateChangeIndex]
                 break
         if estadoActual != None:
             

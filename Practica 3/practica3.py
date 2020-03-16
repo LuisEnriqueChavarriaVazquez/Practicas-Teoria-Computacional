@@ -199,6 +199,8 @@ while not salir:
             lenguajeIncisoDos.append(cadenaEntrada)
             evaluarBinario(lenguajeIncisoDos,secondAutomataDefined)
             contador += 1
+    elif opcionMenuPrincipal == 4:
+        
     elif opcionMenuPrincipal==3:
         cadenaEntrada=input("Cadena entrada:")
         evaluarCadenaABC(cadenaEntrada)
