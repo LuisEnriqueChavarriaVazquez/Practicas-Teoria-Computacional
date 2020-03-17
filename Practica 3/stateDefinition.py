@@ -23,4 +23,5 @@ class automataDefinition:
             for camino in estadoActual.listado:
                 if camino[0]==numero:
                     self.estadoNombre=camino[1]
-                    print(self.estadoNombre)
+                    ##print(self.estadoNombre) SOLO USARSE PARA COMPRABAR EL PATH DE LOS ESTADOS (NO OPTIMIZADO AUN YA QUE
+                    # MULTIPLES VALORES SE ALMACENAN EN CACHE Y PUEDE QUE LO QUE SE OBSERVE EN PANTALLA NO SEA EL DATO ADECUADO)

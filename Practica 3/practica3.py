@@ -141,9 +141,9 @@ def evaluarBinario(lenguajeIncisoDos,secondAutomataDefined):
         contadorAutomataStatePosition += 1
 
         if secondAutomataDefined.estadoNombre in lstAceptados:
-            print("Cadena valida")
+            print(f"""{linea} Cadena valida""")
         else:
-            print("Tu cadena es invalida")
+            print(f"""{linea} Tu cadena es invalida""")
             secondAutomataDefined=automataDefinition(secondAutomataListOfStates)
 
     
@@ -172,35 +172,6 @@ lstAceptados=[]
 lstAceptados.append("ESTADO_2")
 lstAceptados.append("ESTADO_6")
 
-### PARTE DE LA MAQUINA DE VENDING
-
-"""stateItself0_2=stateItself([[0,"ESTADO_vending_1"],[1,"ESTADO_vending_2"]],"ESTADO_vending_0")
-stateItself1_2=stateItself([[0,"ESTADO_vending_2"],[1,"ESTADO_vending_3"]],"ESTADO_vending_1")
-stateItself2_2=stateItself([[0,"ESTADO_vending_3"],[1,"ESTADO_vending_4"]],"ESTADO_vending_2")
-stateItself3_2=stateItself([[0,"ESTADO_vending_4"],[1,"ESTADO_vending_5"]],"ESTADO_vending_3")
-stateItself4_2=stateItself([[0,"ESTADO_vending_3"],[1,"ESTADO_vending_6"]],"ESTADO_vending_4") ##Final
-stateItself5_2=stateItself([[0,"ESTADO_vending_2"],[1,"ESTADO_vending_7"]],"ESTADO_vending_5") ##Final
-stateItself6_2=stateItself([[0,"ESTADO_vending_1"],[1,"ESTADO_vending_8"]],"ESTADO_vending_6") ##Final
-stateItself6_2=stateItself([[0,"ESTADO_vending_8"],[1,"ESTADO_vending_9"]],"ESTADO_vending_6") ##Final
-stateItself6_2=stateItself([[0,"ESTADO_vending_8"],[1,"ESTADO_vending_7"]],"ESTADO_vending_6") ##Final
-
-vending_AutomataListOfStates=[]
-vending_AutomataListOfStates.append(stateItself0)
-vending_AutomataListOfStates.append(stateItself1)
-vending_AutomataListOfStates.append(stateItself2)
-vending_AutomataListOfStates.append(stateItself3)
-vending_AutomataListOfStates.append(stateItself4)
-vending_AutomataListOfStates.append(stateItself5)
-vending_AutomataListOfStates.append(stateItself6)
-
-
-vending_AutomataDefined=automataDefinition(vending_AutomataListOfStates)
-lstAceptados_vending=[]
-
-lstAceptados_vending.append("ESTADO_vending_5")
-lstAceptados_vending.append("ESTADO_vending_6")
-lstAceptados_vending.append("ESTADO_vending_7")
-lstAceptados_vending.append("ESTADO_vending_9")"""
 
 ##Validacion de los casos de la maquina de VENDING
 def maquinaVending(acumulado):
