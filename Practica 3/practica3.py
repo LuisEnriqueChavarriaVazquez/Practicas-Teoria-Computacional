@@ -284,6 +284,16 @@ def validarDolares(cadenaEntrada):
     else:
         return False
 
+##Primer contacto de la maquina
+def primerBebida():
+    cadenaEntrada = float(input("Ingrese una cantidad de dinero = "))
+    validacion = validarDolares(cadenaEntrada)
+    if validacion == True:
+        print(f"""{linea} Cantidad aceptada """)
+        maquinaVending(cadenaEntrada)
+    else:
+        print("Valor no adecuado, la maquina no acepta dichas cantidades")
+
 
 ### Parte del semaforo
 def ejecutarSemaforo():
@@ -368,13 +378,12 @@ while not salir:
         print(f"""Bienvenido a la maquina de Vending de SODAS
                 /////// SOLO ACEPTAMOS 1 DOLAR Y .25 CENTAVOS
                 {linea} Precio de las sodas: 1.25 """)
-        cadenaEntrada = float(input("Ingrese una cantidad de dinero = "))
-        validacion = validarDolares(cadenaEntrada)
-        if validacion == True:
-            print(f"""{linea} Cantidad aceptada """)
-            maquinaVending(cadenaEntrada)
+        primerBebida()
+        masBebida = input("Desea comprar otra soda??? (Y/N)")
+        if masBebida == "Y" or masBebida == "y":
+            primerBebida()
         else:
-            print("Valor no adecuado, la maquina no acepta dichas cantidades")
+            print("Gracias por su compra!!")
     elif opcionMenuPrincipal == 6:
         print("El lenguaje ingresado es == ")
         print(lenguajeIncisoDos)
