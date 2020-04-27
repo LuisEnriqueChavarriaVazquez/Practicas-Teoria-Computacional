@@ -1,4 +1,4 @@
-#Practica 4 Ricardo Alberto Machorro Vences
+#Practica 4 Ricardo Alberto Machorro Vences /// Chavarría Vázquez Luis Enrique
 #Esta es la practica4 use la libreria openpyxl para usar excel por que es mas facil asi, se tiene que descargar nadamas
 from openpyxl import load_workbook
 from openpyxl import Workbook
