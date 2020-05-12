@@ -36,7 +36,7 @@ def verprimerEstadoInicial(posibleprimerEstadoInicial):#Checa si al revisar la t
     else:
         return False
 
-def verEstadosFinal(posibleEstadoFinal):#Checa si al revisar la tabla un estado es final
+def verEstadosFinal(posibl|eEstadoFinal):#Checa si al revisar la tabla un estado es final
     if(posibleEstadoFinal[0]=="*"):
         return True
     else:

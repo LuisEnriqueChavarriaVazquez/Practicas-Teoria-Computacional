@@ -47,7 +47,7 @@ def evaluarNumero(cadenaEntrada):
          print("Cadena rechazada")
      elif Puntero==len(cadenaEntrada)-1 and cadenaEntrada[Puntero] in listaNumeros:
          print("Cadena aceptada")
-     elif cadenaEntrada[Puntero]=="E" and Puntero!=len(cadenaEntrada)-1:
+     elif (cadenaEntrada[Puntero]=="E" or cadenaEntrada[Puntero]=="e" ) and Puntero!=len(cadenaEntrada)-1:
          if cadenaEntrada[Puntero+1]=="+" or cadenaEntrada[Puntero+1]=="-":
               Puntero=Puntero+1
          for l in range(Puntero+1,len(cadenaEntrada)):
@@ -69,7 +69,7 @@ def evaluarNumero(cadenaEntrada):
              print("Cadena rechazada")
          elif Puntero==len(cadenaEntrada)-1 and cadenaEntrada[Puntero] in listaNumeros:
              print("Cadena aceptada")
-         elif cadenaEntrada[Puntero]=="E" and Puntero!=len(cadenaEntrada)-1:
+         elif (cadenaEntrada[Puntero]=="E" or cadenaEntrada[Puntero]=="e") and Puntero!=len(cadenaEntrada)-1:
              if cadenaEntrada[Puntero+1]=="+" or cadenaEntrada[Puntero+1]=="-":
                  Puntero=Puntero+1
              soloNumeros=0
