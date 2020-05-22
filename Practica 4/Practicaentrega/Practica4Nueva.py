@@ -1,6 +1,7 @@
-#Practica 4 Ricardo Alberto Machorro Vences
+#Practica 4 Ricardo Alberto Machorro Vences /// Chavarría Vázquez Luis Enrique
 #Esta es la practica4 use la libreria openpyxl para usar excel por que es mas facil asi, se tiene que descargar nadamas
 from openpyxl import load_workbook
+from openpyxl import Workbook
 
 #Un auotomata convexo es el grupo de estados de un automata que ya se verifico que se puede llegar a ellos desde le estado inicial
 
@@ -41,35 +42,7 @@ def verEstadosFinal(posibleEstadoFinal):#Checa si al revisar la tabla un estado 
     else:
         return False
 
-def estadosConvexo(estadoInicial,listaEstadosFinales,listaEstados,sheetExcel):#Esta funcion esta de mas
-    final=False
-    listaEstVerificados=set()
-    listaEstVerificados.add(estadoInicial)
-    listaEstadosEsperaAnt=set()
-    listaEstadosEsperaAnt.add(estadoInicial)
-    listaEstadosEsperaNuevos=set()
-    while(final==False):
-        for row in sheetExcel.iter_rows(min_row=2):
-            if(row[0].value!=None):
-                valorCelda=""
-                if(verprimerEstadoInicial(row[0].value) or verEstadosFinal(row[0].value)):
-                    valorCelda=row[0].value[1:len(row[0].value)]
-                else:
-                    valorCelda=row[0].value
-                if(valorCelda in listaEstadosEsperaAnt):
-                    for i in range(1,sheetExcel.max_column):
-                        listaEstVerificados.add(row[i].value)
-                        listaEstadosEsperaNuevos.add(row[i].value)
-            else:
-                break
-                break      
-        listaEstadosEsperaNuevos=listaEstadosEsperaNuevos-listaEstadosEsperaAnt
-        if (len(listaEstadosEsperaNuevos)==0):
-            final=True
-        else:
-            listaEstadosEsperaAnt=listaEstadosEsperaNuevos
-            listaEstadosEsperaNuevos.clear()
-    print(listaEstVerificados)
+
 
 #Esta funcion regresa los estados del automataConvexo, es decir aquellos que ya se sabe que se pude llegar desde el estado inicial
 #el sheetExcel es el objeto que permite leer datos de excel
@@ -101,16 +74,16 @@ def estadosConvexosNuevo(estadoInicial,listaEstadosFinales,listaEstados,sheetExc
         if(len(listaEstadosBusPendienteAhora)==0):
             final=True
     return(listaEstadosVerificados)
-              
 
 def automataConvexo(sheetInicial):
-    primerEstadoInicial=""
     for row in sheetInicial.iter_rows(min_row=2):
         if(row[0].value!=None):
             if(verprimerEstadoInicial(row[0].value)):
                 primerEstadoInicial=row[0].value
-                primerEstadoInicial=primerEstadoInicial[1:len(primerEstadoInicial)]
-                listaEstadosIniciales.append(primerEstadoInicial)
+                listOfGlobals = globals()
+                listOfGlobals['primerEstadoInicial']=primerEstadoInicial[1:len(primerEstadoInicial)]
+                estadoInicialInterno=primerEstadoInicial[1:len(primerEstadoInicial)]
+                listaEstadosIniciales.append(estadoInicialInterno)
             elif(verEstadosFinal(row[0].value)):
                 estadoFinal=row[0].value
                 estadoFinal=estadoFinal[1:len(estadoFinal)]
@@ -118,11 +91,7 @@ def automataConvexo(sheetInicial):
                 listaEstadosIniciales.append(estadoFinal)
             else:
                 listaEstadosIniciales.append(row[0].value)
-                
-   # print(primerEstadoInicial)
-   # print(listaEstadosFinalesIniciales)
-   # print(listaEstadosIniciales)
-    return(estadosConvexosNuevo(primerEstadoInicial,listaEstadosFinalesIniciales,listaEstadosIniciales,sheetInicial))
+    return(estadosConvexosNuevo(estadoInicialInterno,listaEstadosFinalesIniciales,listaEstadosIniciales,sheetInicial))
 
 #Esta funcion es para obtener la fila en la que esta un estado
 def obtenerFilaEstado(sheetExcel,estado):
@@ -148,7 +117,6 @@ def sonEquivalentesEstados(sheetExcel,estado1,estado2,diccionarioEntrada):
     for i in range(2,sheetExcel.max_column+1):
         valorPrueba1=sheet.cell(row=filaEstado1,column=i).value
         valorPrueba2=sheet.cell(row=filaEstado2,column=i).value
-        print("dicEva:",diccionarioEntrada," est1:",estado1," est2:",estado2, " valorPr1:",valorPrueba1, "valorPr", valorPrueba2)
         if(diccionarioEntrada[valorPrueba1]==diccionarioEntrada[valorPrueba2]):
             sonEquivalentes=True
         else:
@@ -166,51 +134,52 @@ def compararConjuntosCocientes(conjuntoCociente1,conjuntoConciente2):
             iguales=True
         else:
             iguales=False
-    return iguales        
+            break
+    return iguales      
 
-def conjuntoCocienteCorregido(sheetInicial,listaEstadosConvexos,ListaEstadosFinalesConvexos,estadoInicial):
+#Esta funcion te crea un diccionoario teneindo como llvaes los diferentes estados convexos y como vaor el grupo al que pertenecen
+def conjuntoCociente(sheetExcel,listaEntradaEstadosAutomataConvexo,listaEntradaEstadosFinalesAutomataConvexo,estadoInicial):
+    print("estadoInicial",estadoInicial)
     diccionarioEstadosConjuntoCociente1=dict(Ejemplo="Inicio")
     diccionarioEstadosConjuntoCociente1.clear()
     diccionarioEstadosConjuntoCociente2=diccionarioEstadosConjuntoCociente1.copy()
-    listaEstadosNormales=listaEstadosConvexos-ListaEstadosFinalesConvexos
-    for ele in ListaEstadosFinalesConvexos:
-        diccionarioEstadosConjuntoCociente1[ele]="0"
-    for ele in listaEstadosNormales:
-        diccionarioEstadosConjuntoCociente1[ele]="1"
-    print(diccionarioEstadosConjuntoCociente1)
+    setListaEstadosNoFinalesConvexo=listaEntradaEstadosAutomataConvexo-listaEntradaEstadosFinalesAutomataConvexo
+    for ele in listaEntradaEstadosFinalesAutomataConvexo:
+        diccionarioEstadosConjuntoCociente1[ele]='0'
+    for ele in setListaEstadosNoFinalesConvexo:
+        diccionarioEstadosConjuntoCociente1[ele]='1'
     diccionarioEstadosConjuntoCociente2=diccionarioEstadosConjuntoCociente1.copy()
     listaNumeroConjuntos=set(diccionarioEstadosConjuntoCociente1.values())
     contadorNumeroConjuntos=len(listaNumeroConjuntos)
-    indiceMaxNumeroConjuntos=contadorNumeroConjuntos-1
+    indiceConjuntoMayor=contadorNumeroConjuntos-1
     contadorIgualdad=0
-    while(contadorIgualdad<=3):
+    while(contadorIgualdad<4):
         for conjunto in listaNumeroConjuntos:
             estadosEvaluar=set()
             estadosCambiar=set()
-            for estado in listaEstadosConvexos:
-                if diccionarioEstadosConjuntoCociente1[estado]==conjunto:
+            for estado in listaEntradaEstadosAutomataConvexo:
+                if(diccionarioEstadosConjuntoCociente1[estado]==conjunto):
                     estadosEvaluar.add(estado)
-            if (len(estadosEvaluar)==2):
-                setAux=estadosEvaluar.copy()
-                estado1eva=setAux.pop()
-                estado2eva=setAux.pop()
-                if(sonEquivalentesEstados(sheetInicial,estado1eva,estado2eva,diccionarioEstadosConjuntoCociente1)==False):
-                    estadosCambiar.add(estado1eva)
+            if(len(estadosEvaluar)==2):
+                valor1Eva=estadosEvaluar.pop()
+                valor2Eva=estadosEvaluar.pop()
+                if(sonEquivalentesEstados(sheetExcel,valor1Eva,valor2Eva,diccionarioEstadosConjuntoCociente1)==False):
+                    estadosCambiar.add(valor1Eva)
             else:
                 for estado1eva in estadosEvaluar:
                     for estado2eva in estadosEvaluar:
-                        if estado1eva!=estado2eva:
-                            if(sonEquivalentesEstados(sheetInicial,estado1eva,estado2eva,diccionarioEstadosConjuntoCociente1)):
+                        if estado2eva!=estado1eva:
+                            if(sonEquivalentesEstados(sheetExcel,estado1eva,estado2eva,diccionarioEstadosConjuntoCociente1)):
                                 estadosCambiar.add(estado1eva)
-                                estadosCambiar.add(estado2eva)
-           
             if(len(estadosCambiar)==0):
                 pass
+            elif(len(estadosCambiar)==len(estadosEvaluar)):
+                pass
             else:
-                indiceMaxNumeroConjuntos=indiceMaxNumeroConjuntos+1
+                indiceConjuntoMayor=indiceConjuntoMayor+1
                 for est,con in diccionarioEstadosConjuntoCociente1.items():
-                    if (est in estadosCambiar):
-                        diccionarioEstadosConjuntoCociente2[est]=str(indiceMaxNumeroConjuntos)
+                     if (est in estadosCambiar):
+                         diccionarioEstadosConjuntoCociente2[est]=str(indiceConjuntoMayor)
         if (compararConjuntosCocientes(diccionarioEstadosConjuntoCociente1,diccionarioEstadosConjuntoCociente2)):
             contadorIgualdad=contadorIgualdad+1
             diccionarioEstadosConjuntoCociente1=diccionarioEstadosConjuntoCociente2.copy()
@@ -219,61 +188,50 @@ def conjuntoCocienteCorregido(sheetInicial,listaEstadosConvexos,ListaEstadosFina
             diccionarioEstadosConjuntoCociente1=diccionarioEstadosConjuntoCociente2.copy()
             listaNumeroConjuntos=set(diccionarioEstadosConjuntoCociente1.values())
             contadorNumeroConjuntos=len(listaNumeroConjuntos)
-            indiceMaxNumeroConjuntos=contadorNumeroConjuntos-1
-    print("dict",diccionarioEstadosConjuntoCociente1)
+            indiceConjuntoMayor=contadorNumeroConjuntos-1
+    return diccionarioEstadosConjuntoCociente1
 
-#creo que esta funcion tampoco sirve o no se usa
-def conjuntoCociente(sheetInicial,listaEstadosConvexos,ListaEstadosFinalesConvexos,estadoInicial):
-    diccionarioEstadosConjuntoCociente1=dict(Ejemplo="Inicio")
-    diccionarioEstadosConjuntoCociente1.clear()
-    diccionarioEstadosConjuntoCociente2=diccionarioEstadosConjuntoCociente1.copy()
-    listaEstadosNormales=listaEstadosConvexos-ListaEstadosFinalesConvexos
-    for ele in listaEstadosFinalesConvexo:
-        diccionarioEstadosConjuntoCociente1[ele]="0"
-    for ele in listaEstadosNormales:
-        diccionarioEstadosConjuntoCociente1[ele]="1"
-    diccionarioEstadosConjuntoCociente2=diccionarioEstadosConjuntoCociente1.copy()
-    listaNumeroConjuntos=set(diccionarioEstadosConjuntoCociente1.values())
-    contadorNumeroConjuntos=len(listaNumeroConjuntos)
-    indiceMaxNumeroConjuntos=contadorNumeroConjuntos-1
-    contadorIgualdad=0
-    while(contadorIgualdad<=3):
-        for conjunto in listaNumeroConjuntos:
-            estadosEvaluar=set()
-            estadosCambiar=set()
-            for estado in listaEstadosConvexos:
-                if diccionarioEstadosConjuntoCociente1[estado]==conjunto:
-                    estadosEvaluar.add(estado)
-            for estado1eva in estadosEvaluar:
-                for estado2eva in estadosEvaluar:
-                    if estado1eva!=estado2eva:
-                        if(sonEquivalentesEstados(sheetInicial,estado1eva,estado2eva,diccionarioEstadosConjuntoCociente1)):
-                            print(sonEquivalentesEstados(sheetInicial,estado1eva,estado2eva,diccionarioEstadosConjuntoCociente1))
-                            estadosCambiar.add(estado1eva)
-                            estadosCambiar.add(estado2eva)
-            if(len(estadosCambiar)==0):
-                pass
-            else:
-                indiceMaxNumeroConjuntos=indiceMaxNumeroConjuntos+1
-                for est,con in diccionarioEstadosConjuntoCociente1.items():
-                    if (est in estadosCambiar):
-                        diccionarioEstadosConjuntoCociente2[est]=str(indiceMaxNumeroConjuntos)
-        print("diccio1:",diccionarioEstadosConjuntoCociente1," diccio2:",diccionarioEstadosConjuntoCociente2)
-        print("COMPARADOdIC",compararConjuntosCocientes(diccionarioEstadosConjuntoCociente1,diccionarioEstadosConjuntoCociente2))
-        if (compararConjuntosCocientes(diccionarioEstadosConjuntoCociente1,diccionarioEstadosConjuntoCociente2)):
-            contadorIgualdad=contadorIgualdad+1
-            diccionarioEstadosConjuntoCociente1=diccionarioEstadosConjuntoCociente2.copy()
-        else:
-            contadorIgualdad=0
-            diccionarioEstadosConjuntoCociente1=diccionarioEstadosConjuntoCociente2.copy()
-            listaNumeroConjuntos=set(diccionarioEstadosConjuntoCociente1.values())
-            contadorNumeroConjuntos=len(listaNumeroConjuntos)
-            indiceMaxNumeroConjuntos=contadorNumeroConjuntos-1
-    print("dict",diccionarioEstadosConjuntoCociente1)
+
+def escribirAutomataFinal(sheetInicial,sheetFinal,diccionarioAutomataReducido):
+    sheetFinal["A1"]="δ"
+    listaValoresEntrada=list()
+    lineaEscritura=2
+    for col in sheetInicial.iter_cols(min_col=2):#Aqui se imprime los diferentes valores de entrada del automata
+        if(col[0].value!=None):
+            listaValoresEntrada.append(col[0].value)   
+    for i in range(2,(len(listaValoresEntrada))+2):
+        sheetFinal.cell(row=1,column=i).value=listaValoresEntrada[(i-2)]
+    listaConjuntos=set(diccionarioAutomataReducido.values())
+    listaEstados=set(diccionarioAutomataReducido.keys())
+    for conjuntos in listaConjuntos:
+        estadosEscribir=list()
+        for estados in listaEstados:
+           if(diccionarioAutomataReducido[estados]==conjuntos):
+               estadosEscribir.append(estados)
+        lineaRefLectura=obtenerFilaEstado(sheetInicial,estadosEscribir[0])
+        escrituraPrimerCuadro=""
+        if primerEstadoInicial in estadosEscribir:
+            escrituraPrimerCuadro="→"+escrituraPrimerCuadro
+        elif(len((listaEstadosFinalesConvexo-(set(estadosEscribir))))<len(listaEstadosFinalesConvexo)):
+            escrituraPrimerCuadro="*"+escrituraPrimerCuadro
+        for i in range(0,len(estadosEscribir)):
+            escrituraPrimerCuadro=escrituraPrimerCuadro+estadosEscribir[i]
+            if (len(estadosEscribir)>1 and i<(len(estadosEscribir)-1)):
+                escrituraPrimerCuadro=escrituraPrimerCuadro+","
+        sheetFinal.cell(row=lineaEscritura,column=1).value=escrituraPrimerCuadro
+        lineabusquedaResulValoresEntrada=obtenerFilaEstado(sheetInicial,estadosEscribir[0])
+        listaValoresResultadoFinal=list()
+        for i in range(2,(sheetInicial.max_column)+1):
+            listaValoresResultadoFinal.append(sheetInicial.cell(row=lineabusquedaResulValoresEntrada,column=i).value)
+        limiteEscritura=sheetInicial.max_column+1
+        for i in range(2,limiteEscritura):
+            sheetFinal.cell(row=lineaEscritura,column=i).value=listaValoresResultadoFinal[i-2]
+        lineaEscritura=lineaEscritura+1
         
         
 
 
+        
 #Menu
 FILEPATHUSUARIO=input("Escriba el la direccion del archivo excel:\n")# Esta es la direccion del archivo excel
 SHEETUSUARIO=input("Escriba el nombre de la hoja de calculo en excel:\n")#Esta es la hoja de calculo de excel
@@ -283,5 +241,8 @@ listaEstadosAutomataConvexo=automataConvexo(sheet)# Se dan los estados del autom
 setListaEstadosIniciales=set(listaEstadosIniciales)# Se crean los estados del automata antes de ser convexo
 listaEstadosDesechadosConvexo=setListaEstadosIniciales-listaEstadosAutomataConvexo# se dan los estados que no quedaron en el automata convexo
 listaEstadosFinalesConvexo=set(listaEstadosFinalesIniciales)-listaEstadosDesechadosConvexo#se dan los estados finales del auotomata convexo
-#print(listaEstadosAutomataConvexo)
-conjuntoCocienteCorregido(sheet,listaEstadosAutomataConvexo,listaEstadosFinalesConvexo,primerEstadoInicial)#Aui se trata de crear el conjunto cociente
+diccionarioConjuntoCociente=conjuntoCociente(sheet,listaEstadosAutomataConvexo,listaEstadosFinalesConvexo,primerEstadoInicial)#Aqui se trata de crear el conjunto cociente
+print(diccionarioConjuntoCociente)
+sheetResultados=workbook.create_sheet("SheetResultadosAutomata",-1)
+escribirAutomataFinal(sheet,sheetResultados,diccionarioConjuntoCociente)
+workbook.save(FILEPATHUSUARIO)
